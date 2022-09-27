@@ -13,7 +13,7 @@
             Room room8 = new Room("Room 8", "room with two doors, what could they lead too?");
             Room room9 = new Room("Room 9", "room with a minotaurus that are the strongest creature, fight it or flee too the door");
 
-        public void setMap() {
+        public void createMap() {
             room1.setRoom(null, room4, null, room2);
             room2.setRoom(null, null, room1, room3);
             room3.setRoom(null, room6, room2, null);
@@ -31,19 +31,24 @@
 
             Scanner input = new Scanner(System.in);
             System.out.println("Welcome to the Adventure Game");
+            createMap();
             while (true) {
                 String choice = input.nextLine();
                 if (choice.equalsIgnoreCase("Go north")) {
-                    System.out.println("Going north");
+                    //System.out.println("Going north");
+                    goNorth();
                 }
                 else if (choice.equalsIgnoreCase("Go south")) {
-                    System.out.println("Going south");
+                    //System.out.println("Going south");
+                    goSouth();
                 }
                 else if (choice.equalsIgnoreCase("Go east")) {
-                    System.out.println("Going east");
+                    //System.out.println("Going east");
+                    goEast();
                 }
                 else if (choice.equalsIgnoreCase("Go west")) {
-                    System.out.println("Going west");
+                    //System.out.println("Going west");
+                    goWest();
                 }
                 else if (choice.equalsIgnoreCase("Exit")) {
                     System.out.println("Exiting Thanks for playing");
@@ -63,5 +68,42 @@
 
             }
         }
+
+        public void goNorth() {
+            if(currentRoom.getNorth() == null) {
+                System.out.println("You cannot go north");
+            } else {
+                currentRoom = currentRoom.getNorth();
+                System.out.println(currentRoom.getDescription());
+            }
+        }
+
+        public void goSouth() {
+            if(currentRoom.getSouth() == null) {
+                System.out.println("You cannot go south");
+            } else {
+                currentRoom = currentRoom.getSouth();
+                System.out.println(currentRoom.getDescription());
+            }
+        }
+
+        public void goWest() {
+            if(currentRoom.getWest() == null) {
+                System.out.println("You cannot go west");
+            } else {
+                currentRoom = currentRoom.getWest();
+                System.out.println(currentRoom.getDescription());
+            }
+        }
+
+        public void goEast() {
+            if(currentRoom.getEast() == null) {
+                System.out.println("You cannot go east");
+            } else {
+                currentRoom = currentRoom.getEast();
+                System.out.println(currentRoom.getDescription());
+            }
+        }
+
     }
 
