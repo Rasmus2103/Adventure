@@ -2,14 +2,21 @@ public class Room {
 
 private String name;
 private String description;
-/*private String east;
-private String north;
-private String south;
-private String west;*/
+private Room east;
+private Room north;
+private Room south;
+private Room west;
 
     public Room(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public void setRoom(Room north, Room south, Room west, Room east) {
+        this.north = north;
+        this.south = south;
+        this.west = west;
+        this.east = east;
     }
 
     public Room() {
@@ -23,20 +30,19 @@ private String west;*/
         return description;
     }
 
-    /*public String getNorth() {
+    public Room getNorth() {
         return north;
     }
 
-    public String getSouth() {
-        return south;
-    }
-
-    public String getEast() {
+    public Room getEast() {
         return east;
     }
 
-    public String getWest() {
-        return west;
-    }*/
+    public Room getSouth() {
+        return south;
+    }
 
+    public Room getWest() {
+        return west;
+    }
 }
