@@ -11,7 +11,7 @@
             Room room6 = new Room("Room 6", "room that has a shield hanging at the wall, take it or proceed to the next room");
             Room room7 = new Room("Room 7", "room that has pictures of Kings and Queens, only one door");
             Room room8 = new Room("Room 8", "room with two doors, what could they lead too?");
-            Room room9 = new Room("Room 9", "room with a minotaurus that are the strongest creature, fight it or flee too the door");
+            Room room9 = new Room("Room 9", "room with a minotaurs that are the strongest creature, fight it or flee too the door");
 
         public void createMap() {
             room1.setRoom(null, room4, null, room2);
@@ -55,7 +55,9 @@
                     System.exit(0);
                 }
                 else if (choice.equalsIgnoreCase("Help")) {
-                    System.out.println("Helping");
+                    System.out.println("You can write go north, south, west or east to go in a direction" +
+                            " \nlook to see what room you are in, and a description" +
+                            " \nexit to leave the game");
                 }
                 else if (choice.equalsIgnoreCase("Look")) {
                     System.out.println("Looking");
@@ -106,4 +108,3 @@
         }
 
     }
-
