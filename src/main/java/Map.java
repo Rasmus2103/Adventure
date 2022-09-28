@@ -1,9 +1,12 @@
 
 public class Map {
     Room currentRoom = new Room();
-    Adventure adventure = new Adventure();
 
-    public void Map() {
+    //Fjernet new adventure objektet, da det ikke er relateret til adventure objektet der blev brugt til at sætte map.currentRoom værdien.
+    //Da det var to forskellige objekter, har vi fjernet det ene, så vi altid bruger det samme adventure objekt.
+    //Derfor er det tilføjet som en parameter i mapRooms metoden
+    //Husk altid at metoder starter med småt.
+    public void mapRooms(Adventure adventure) {
         adventure.room1.setRoom(null, adventure.room4, null, adventure.room2);
         adventure.room2.setRoom(null, null, adventure.room1, adventure.room3);
         adventure.room3.setRoom(null, adventure.room6, adventure.room2, null);
