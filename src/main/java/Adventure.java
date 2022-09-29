@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Adventure {
         Room room1 = new Room("Room 1", "room with no distinct features, except two doors");
         Room room2 = new Room("Room 2", "room that has a lot things lying around, only one other door");
         Room room3 = new Room("Room 3", "room with a lot a skeletons and an old axe, and only one other door");
-        Room room4 = new Room("Room 4", "room with a giant ready to kill you, fight or run to the door");
+        Room room4 = new Room("Room 4", "room with a giant ready to kill you, fight it with the sword on the ground or run to the door");
         Room room5 = new Room("Room 5", "room with a bag of gold lying on the ground, there are no other doors to go through");
         Room room6 = new Room("Room 6", "room that has a shield hanging on the wall, take it or proceed to the next room");
         Room room7 = new Room("Room 7", "room that has pictures of Kings and Queens, only one door");
