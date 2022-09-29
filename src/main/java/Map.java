@@ -19,15 +19,15 @@ public class Map {
     }
 
     public void itemRooms(Adventure adventure) {
-        adventure.room1.addItems("Shield", "A shield that seems to have a royal crest on it");
-        adventure.room2.addItems("Lamp", "A old lamp hanging at the wall");
-        adventure.room3.addItems("Health Potion", "A potion that seems to have healing powers");
-        adventure.room4.addItems("Sword", "A shiny sword is laying on the ground");
-        adventure.room5.addItems("Bag of gold", "A shiny bag bag of gold");
-        adventure.room6.addItems("Map", "An old map, seems like it could lead to something valuable");
-        adventure.room7.addItems("Torch", "A torch hanging at the wall, that could help light up dark places");
-        adventure.room8.addItems(null, null);
-        adventure.room9.addItems(null, null);
+        // Husk at sætte den rigtige rækkefølge fra den anden tekst.
+        adventure.room2.addItem("Lamp", "A old lamp hanging at the wall");
+        adventure.room3.addItem("Health Potion", "A potion that seems to have healing powers");
+        adventure.room4.addItem("Sword", "A shiny sword is laying on the ground");
+        adventure.room5.addItem("Bag of gold", "A shiny bag bag of gold");
+        adventure.room6.addItem("Map", "An old map, seems like it could lead to something valuable");
+        adventure.room7.addItem("Torch", "A torch hanging at the wall, that could help light up dark places");
+        adventure.room8.addItem("Shield", "A shield that seems to have a royal crest on it");
+        adventure.room9.addItem(null, null);
     }
 
     public void removeItems(Adventure adventure) {
@@ -35,47 +35,49 @@ public class Map {
     }
 
 
-    public void showItemsRooms() {
+    public void showItemsRooms(UserInterface UI) {
             for(int i =0; i <currentRoom.getItems().size(); i++) {
-                System.out.println(currentRoom.getItems().get(i).getItemName());
-                System.out.println(currentRoom.getItems().get(i).getItemDescription());
-             }
+                UI.printItemsInRoom(i, currentRoom);
+            }
     }
 
-    public void goNorth() {
+    public void goNorth(UserInterface UI) {
         if(currentRoom.getNorth() == null) {
-            System.out.println("You cannot go north");
+            UI.youCantGoNorth();
         } else {
             currentRoom = currentRoom.getNorth();
-            System.out.println(currentRoom.getDescription());
+            UI.goingNorth(currentRoom.getDescription());
         }
     }
 
-    public void goSouth() {
+    public void goSouth(UserInterface UI) {
         if(currentRoom.getSouth() == null) {
-            System.out.println("You cannot go south");
+            UI.cannotGoSouth();
         } else {
             currentRoom = currentRoom.getSouth();
-            System.out.println(currentRoom.getDescription());
+            UI.goingSouth(currentRoom.getDescription());
         }
     }
 
-    public void goWest() {
+
+
+    public void goWest(UserInterface UI) {
         if(currentRoom.getWest() == null) {
-            System.out.println("You cannot go west");
+            UI.cannotGoWest();
         } else {
             currentRoom = currentRoom.getWest();
-            System.out.println(currentRoom.getDescription());
+            UI.goingWest(currentRoom.getDescription());
         }
     }
 
-    public void goEast() {
+    public void goEast(UserInterface UI) {
         if(currentRoom.getEast() == null) {
-            System.out.println("You cannot go east");
+            UI.cannotGoEast();
         } else {
             currentRoom = currentRoom.getEast();
-            System.out.println(currentRoom.getDescription());
+            UI.goingEast(currentRoom.getDescription());
         }
     }
+
 }
 

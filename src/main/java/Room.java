@@ -8,7 +8,7 @@ private Room east;
 private Room north;
 private Room south;
 private Room west;
-private ArrayList<Items> items;
+private ArrayList<Item> items;
 
     public Room(String name, String description) {
         this.name = name;
@@ -23,20 +23,41 @@ private ArrayList<Items> items;
         this.east = east;
     }
 
-    public void addItems(String itemName, String itemDescription){
-        Items items1 = new Items(itemName, itemDescription);
-        items.add(items1);
+    public void addItem(String itemName, String itemDescription){
+        Item item1 = new Item(itemName, itemDescription);
+        items.add(item1);
     }
 
-    public void removeItems() {
+    public void takeItem(String itemName, Room currentRoom, UserInterface UI){
+        Item item = findItem(itemName, currentRoom);
 
+        if (item == null){
+            UI.itemDoesNotExist(itemName);
+        } else {
+            removeItem(item, currentRoom);
+        }
     }
 
-    public void showItems() {
-        System.out.println(items.toString());
+    public Item findItem(String itemName, Room currentRoom){
+            for (Item item : currentRoom.getItems()) {
+                if (item.getItemName().equalsIgnoreCase(itemName)){
+                    return item;
+                }
+            }
+        return null;
     }
 
-        //return "Item" + ;
+    public void removeItem(Item item, Room currentRoom) {
+        currentRoom.getItems().remove(item);
+    }
+
+    public void showItems(UserInterface UI) {
+        UI.printItems(items);
+    }
+
+
+
+    //return "Item" + ;
 
 
     public Room() {
@@ -66,7 +87,7 @@ private ArrayList<Items> items;
         return west;
     }
 
-    public ArrayList<Items> getItems() {
+    public ArrayList<Item> getItems() {
         return items;
     }
 }
