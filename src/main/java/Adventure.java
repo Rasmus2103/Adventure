@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Adventure {
         Room room1 = new Room("Room 1", "room with no distinct features, except two doors");
         Room room2 = new Room("Room 2", "room that has a lot things lying around, only one other door");
@@ -15,12 +12,12 @@ public class Adventure {
         Items item1 = new Items("Sword", "A shiny sword, good for fighting monsters");
 
         public void run(Adventure adventure, UserInterface userInterface) {
-                Map map = new Map();
+                Map adventureMap = new Map();
                 //Vi kalder map metoden, som det første, så vil alle vejene i rummene blive sat. Det er vigtigt den kaldes først,
                 // ellers vil "map.currentRoom" kun havde null værdier.
-                map.mapRooms(adventure);
-                map.itemRooms(adventure);
-                map.currentRoom = adventure.room1;
+                adventureMap.mapRooms(adventure);
+                adventureMap.itemRooms(adventure);
+                adventureMap.currentRoom = adventure.room1;
 
 
                 userInterface.welcome();
@@ -28,16 +25,16 @@ public class Adventure {
                 while (true) {
                         String choice = userInterface.returnUserChoice();
                         if (choice.equalsIgnoreCase("Go north")) {
-                                map.goNorth();
+                                adventureMap.goNorth();
                         }
                         else if (choice.equalsIgnoreCase("Go south")) {
-                                map.goSouth();
+                                adventureMap.goSouth();
                         }
                         else if (choice.equalsIgnoreCase("Go east")) {
-                                map.goEast();
+                                adventureMap.goEast();
                         }
                         else if (choice.equalsIgnoreCase("Go west")) {
-                                map.goWest();
+                                adventureMap.goWest();
                         }
                         else if (choice.equalsIgnoreCase("Exit")) {
                                 userInterface.exiting();
@@ -46,13 +43,10 @@ public class Adventure {
                                 userInterface.help();
                         }
                         else if (choice.equalsIgnoreCase("Look")) {
-                                userInterface.lokking();
-                                //System.out.println("Looking");
-                                //System.out.println(map.currentRoom.getName());
-                                //System.out.println(map.currentRoom.getDescription());
+                                userInterface.looking(adventureMap);
                         }
                         else if(choice.equalsIgnoreCase("Show items")) {
-                                map.showItemsRooms();
+                                adventureMap.showItemsRooms();
                         }
                         else {
                                 System.out.println("You cannot write that");

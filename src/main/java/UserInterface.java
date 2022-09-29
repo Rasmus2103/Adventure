@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class UserInterface {
 
     Scanner input = new Scanner(System.in);
-    Map map = new Map();
 
     public void welcome() {
         System.out.println("Welcome to the Adventure Game");
@@ -24,10 +23,10 @@ public class UserInterface {
                 " \nexit to leave the game");
     }
 
-    public void lokking(){
+    public void looking(Map adventureMap){
         System.out.println("Looking");
-        System.out.println(map.currentRoom.getName());
-        System.out.println(map.currentRoom.getDescription());
+        System.out.println(adventureMap.currentRoom.getName());
+        System.out.println(adventureMap.currentRoom.getDescription());
     }
 
     public void cr(){
