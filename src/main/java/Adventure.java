@@ -12,12 +12,14 @@ public class Adventure {
         Room room8 = new Room("Room 8", "room with two doors, what could they lead too?");
         Room room9 = new Room("Room 9", "room with a minotaur that are the strongest creature, fight it or flee to the door");
 
+        Items item1 = new Items("Sword", "A shiny sword, good for fighting monsters");
 
         public void run(Adventure adventure, UserInterface userInterface) {
                 Map map = new Map();
                 //Vi kalder map metoden, som det første, så vil alle vejene i rummene blive sat. Det er vigtigt den kaldes først,
                 // ellers vil "map.currentRoom" kun havde null værdier.
                 map.mapRooms(adventure);
+                map.itemRooms(adventure);
                 map.currentRoom = adventure.room1;
 
 
@@ -38,18 +40,22 @@ public class Adventure {
                                 map.goWest();
                         }
                         else if (choice.equalsIgnoreCase("Exit")) {
-                                System.exit(0);
+                                userInterface.exiting();
                         }
                         else if (choice.equalsIgnoreCase("Help")) {
-
+                                userInterface.help();
                         }
                         else if (choice.equalsIgnoreCase("Look")) {
-                               // System.out.println("Looking");
+                                userInterface.lokking();
+                                //System.out.println("Looking");
                                 //System.out.println(map.currentRoom.getName());
                                 //System.out.println(map.currentRoom.getDescription());
                         }
+                        else if(choice.equalsIgnoreCase("Show items")) {
+                                map.showItemsRooms();
+                        }
                         else {
-                                //System.out.println("You cannot write that");
+                                System.out.println("You cannot write that");
                         }
                 }
 

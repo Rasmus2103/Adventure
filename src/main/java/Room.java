@@ -23,6 +23,22 @@ private ArrayList<Items> items;
         this.east = east;
     }
 
+    public void addItems(String itemName, String itemDescription){
+        Items items1 = new Items(itemName, itemDescription);
+        items.add(items1);
+    }
+
+    public void removeItems() {
+
+    }
+
+    public void showItems() {
+        System.out.println(items.toString());
+    }
+
+        //return "Item" + ;
+
+
     public Room() {
     }
 
