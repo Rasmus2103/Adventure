@@ -20,37 +20,37 @@ public class Map {
 
     public void goNorth() {
         if(currentRoom.getNorth() == null) {
-            System.out.println("You cannot go north");
+            //System.out.println("You cannot go north");
         } else {
             currentRoom = currentRoom.getNorth();
-            System.out.println(currentRoom.getDescription());
+            //System.out.println(currentRoom.getDescription());
         }
     }
 
     public void goSouth() {
         if(currentRoom.getSouth() == null) {
-            System.out.println("You cannot go south");
+            //System.out.println("You cannot go south");
         } else {
             currentRoom = currentRoom.getSouth();
-            System.out.println(currentRoom.getDescription());
+            //System.out.println(currentRoom.getDescription());
         }
     }
 
     public void goWest() {
         if(currentRoom.getWest() == null) {
-            System.out.println("You cannot go west");
+            //System.out.println("You cannot go west");
         } else {
             currentRoom = currentRoom.getWest();
-            System.out.println(currentRoom.getDescription());
+            //System.out.println(currentRoom.getDescription());
         }
     }
 
     public void goEast() {
         if(currentRoom.getEast() == null) {
-            System.out.println("You cannot go east");
+            //System.out.println("You cannot go east");
         } else {
             currentRoom = currentRoom.getEast();
-            System.out.println(currentRoom.getDescription());
+            //System.out.println(currentRoom.getDescription());
         }
     }
 }
