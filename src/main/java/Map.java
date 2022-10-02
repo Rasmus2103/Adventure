@@ -2,6 +2,7 @@
 public class Map {
     Room currentRoom = new Room();
     UserInterface UI = new UserInterface();
+    Player player = new Player(currentRoom);
 
     //Fjernet new adventure objektet, da det ikke er relateret til adventure objektet der blev brugt til at sætte map.currentRoom værdien.
     //Da det var to forskellige objekter, har vi fjernet det ene, så vi altid bruger det samme adventure objekt.
@@ -42,12 +43,18 @@ public class Map {
             }
     }
 
-    public void takeItems(Item item) {
-        currentRoom.takeItem(item.getItemName(), UI);
+    public void showInventoryPlayer(UserInterface UI) {
+        if(player.getInventory().size() == 0) {
+            UI.noInventory(player);
+        } else {
+            for(int i =0; i < player.getInventory().size(); i++) {
+                UI.printInventory(player, i);
+            }
+        }
     }
 
-    public void showTakenItem(Item item) {
-
+    public void takeItems(Item item) {
+        currentRoom.takeItem(item.getItemName(), UI);
     }
 
     public void goNorth(UserInterface UI) {

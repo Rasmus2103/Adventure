@@ -84,11 +84,19 @@ public class UserInterface {
         System.out.println(items.toString());
     }
 
+    public void printInventory(Player players, int i) {
+        System.out.println(players.getInventory().toString());
+    }
+
+    public void noInventory(Player player) {
+        System.out.println("There is nothing in your inventory");
+    }
+
     public void showTakenItem(Item i) {
         if(i == null) {
             System.out.println("No such item");
         } else {
-            System.out.println("You have taken a " + i.getItemName()); 
+            System.out.println("You have taken a " + i.getItemName());
         }
     }
 

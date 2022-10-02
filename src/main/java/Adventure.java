@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Adventure {
         Room room1 = new Room("Room 1", "room with no distinct features, except two doors");
         Room room2 = new Room("Room 2", "room that has a lamp and hat, only one other door");
@@ -13,6 +15,7 @@ public class Adventure {
 
         public void run(Adventure adventure, UserInterface userInterface) {
                 Map adventureMap = new Map();
+                Player player = new Player(adventureMap.currentRoom);
                 //Vi kalder map metoden, som det første, så vil alle vejene i rummene blive sat. Det er vigtigt den kaldes først,
                 // ellers vil "map.currentRoom" kun havde null værdier.
                 adventureMap.mapRooms(adventure);
@@ -46,6 +49,16 @@ public class Adventure {
                         }
                         else if(choice.equalsIgnoreCase("Show items")) {
                                 adventureMap.showItemsRooms(userInterface);
+                        }
+                        else if (choice.equalsIgnoreCase("Take item")) {
+                                        Scanner sc = new Scanner(System.in);
+                                        String itemName = sc.nextLine();
+                                        Item i = adventureMap.currentRoom.takeItem(itemName, userInterface);
+                                        player.addItemPlayer(i);
+                                        userInterface.showTakenItem(i);
+                                }
+                        else if(choice.equalsIgnoreCase("Inventory")) {
+                                adventureMap.showInventoryPlayer(userInterface);
                         }
                         else {
                                 userInterface.youCannotWriteThat();

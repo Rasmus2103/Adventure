@@ -25,6 +25,10 @@ public class Player {
         this.getInventory();
     }
 
+    public String toString() {
+        return "Inventory: " + inventory;
+    }
+
     public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
     }
