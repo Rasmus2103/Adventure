@@ -12,6 +12,10 @@ public class Item {
         return itemName;
     }
 
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
     public String getItemDescription() {
         return itemDescription;
     }

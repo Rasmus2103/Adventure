@@ -28,14 +28,15 @@ private ArrayList<Item> items;
         items.add(item1);
     }
 
-    public void takeItem(String itemName, Room currentRoom, UserInterface UI){
-        Item item = findItem(itemName, currentRoom);
-
+    public Item takeItem(String itemName, UserInterface UI){
+        Item item = findItem(itemName, this);
         if (item == null){
             UI.itemDoesNotExist(itemName);
         } else {
-            removeItem(item, currentRoom);
+            removeItem(item, this);
         }
+
+        return item;
     }
 
     public Item findItem(String itemName, Room currentRoom){

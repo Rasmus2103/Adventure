@@ -1,6 +1,7 @@
 
 public class Map {
     Room currentRoom = new Room();
+    UserInterface UI = new UserInterface();
 
     //Fjernet new adventure objektet, da det ikke er relateret til adventure objektet der blev brugt til at sætte map.currentRoom værdien.
     //Da det var to forskellige objekter, har vi fjernet det ene, så vi altid bruger det samme adventure objekt.
@@ -30,8 +31,8 @@ public class Map {
         adventure.room9.addItem(null, null);
     }
 
-    public void removeItems(Adventure adventure) {
-
+    public void removeItems(Item item) {
+        currentRoom.removeItem(item, currentRoom);
     }
 
 
@@ -39,6 +40,14 @@ public class Map {
             for(int i =0; i <currentRoom.getItems().size(); i++) {
                 UI.printItemsInRoom(i, currentRoom);
             }
+    }
+
+    public void takeItems(Item item) {
+        currentRoom.takeItem(item.getItemName(), UI);
+    }
+
+    public void showTakenItem(Item item) {
+
     }
 
     public void goNorth(UserInterface UI) {

@@ -84,6 +84,15 @@ public class UserInterface {
         System.out.println(items.toString());
     }
 
+    public void showTakenItem(Item i) {
+        if(i == null) {
+            System.out.println("No such item");
+        } else {
+            System.out.println("You have taken a " + i.getItemName());
+        }
+    }
+
+
     public void youCannotWriteThat() {
         System.out.println("You cannot write that");
     }
