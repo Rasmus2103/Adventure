@@ -88,7 +88,7 @@ public class UserInterface {
         if(i == null) {
             System.out.println("No such item");
         } else {
-            System.out.println("You have taken a " + i.getItemName());
+            System.out.println("You have taken a " + i.getItemName()); 
         }
     }
 
