@@ -91,4 +91,8 @@ private ArrayList<Item> items;
     public ArrayList<Item> getItems() {
         return items;
     }
+
+    public void removeItem() {
+
+    }
 }
