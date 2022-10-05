@@ -10,6 +10,7 @@ public class Player {
         this.currentRoom = currentRoom;
         this.name = "";
         inventory = new ArrayList<>();
+        this.health = 50;
     }
 
     public boolean goNorth() {
@@ -48,18 +49,54 @@ public class Player {
         }
     }
 
+    // Eat metoden, ser om item findes i både inventory og i room
+    public void eat(String name, UserInterface UI){
+        Item itemFromInventory = searchInventoryPlayer(name); //Hentes fra inventory kan være null
+        Item itemFromRoom = currentRoom.findItem(name, currentRoom); //Hentes fra room kan være null
+        if (itemFromInventory == null && itemFromRoom == null){ //Vi tjekker om de begge er null
+            UI.itemDoesNotExist(name); //Hvis begge er null skriver vi en tekst ud med at item ikke findes
+
+        }else if(itemFromInventory != null){ //Hvis item findes i inventory
+            if (isEdible(itemFromInventory)){ //Hvis item "kan spises" en item kan spises hvis metoden isEdible returnere true
+                health += ((Food) itemFromInventory).healthPoints; //Vi caster "item" til food hvilket er muligt, da denne item er en instance of food. altså den er edible
+                // vi tilføjer og sætter = livet i forhold til hvor mange healthPoints item har.
+                UI.eat(name, ((Food) itemFromInventory).healthPoints); //Vi kalder udskrivnings metoden fra UI.
+                removeItemPlayer(itemFromInventory); //Vi fjerner item fra player altså efter man har spist den er den væk.
+            }else {
+                UI.notEdible();//Hvis man ikke kan spise den item altså det ikke er en instance of food, udskriver vi den ikke kan spises.
+
+            }
+        }else if (itemFromRoom != null) { //Hvis item findes i rummet
+            if (isEdible(itemFromRoom)){ //Hvis item er edible
+                health += ((Food) itemFromRoom).healthPoints; //Vi caster item da den er edible, altså er typen "food" som nedarver fra item
+                //Hvis man caster en item som ikke er typen food, vil man få en fejl.
+                UI.eat(name, ((Food) itemFromRoom).healthPoints); //Vi kalder udskrivnings metoden
+                currentRoom.removeItem(itemFromRoom, currentRoom); //Vi fjerner item fra currentRoom da vi har spist den
+            }else {
+                UI.notEdible(); //Vi skriver at man ikke kan spise item
+            }
+        }
+
+    }
+    //Hvis Item er en instance of Food, som betyder hvis denne item er typen food, returner dernæst true, ellers returner false.
+    //Det bruger vi til at sikre, at vi ikke forsøger at cast en item som ikke er "food" da alle food er en item, men ikke alle item er en food.
+    public boolean isEdible(Item item){
+        return item instanceof Food;
+    }
+
     public String look() {
         return currentRoom.getName() + currentRoom.getDescription();
     }
 
     public Item searchInventoryPlayer(String name) {
         for(Item i: inventory) {
-            if(i.getItemName().equals(name)) {
+            if(i.getItemName().equalsIgnoreCase(name)) {
                 return i;
             }
         }
         return null;
     }
+
 
     public void removeItemPlayer(Item item) {
         this.inventory.remove(item);

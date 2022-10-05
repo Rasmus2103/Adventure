@@ -16,8 +16,8 @@ public class ItemsTests {
         Item lamp = room2.findItem("lamp", room2);
         assertNotNull(lamp);
 
-        room2.takeItem("lamp", room2, new UserInterface());
-        room2.takeItem("lamp", room2, new UserInterface());
+        room2.takeItem("lamp", new UserInterface());
+        room2.takeItem("lamp", new UserInterface());
         lamp = room2.findItem("lamp", room2);
         assertNull(lamp);
 

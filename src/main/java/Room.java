@@ -27,6 +27,11 @@ private ArrayList<Item> items;
         Item item1 = new Item(itemName, itemDescription);
         items.add(item1);
     }
+    //Lidt anderledes end addItem, da den instantiere en ny "food" men da food godt kan være en item, må det godt tilføjes til array'et-
+    public void addFood(String itemName, String itemDescription, int health){
+        Food food = new Food(itemName, itemDescription, health);
+        items.add(food);
+    }
 
     public Item takeItem(String itemName, UserInterface UI){
         Item item = findItem(itemName, this);
@@ -92,7 +97,5 @@ private ArrayList<Item> items;
         return items;
     }
 
-    public void removeItem() {
 
-    }
 }

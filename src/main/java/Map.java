@@ -36,6 +36,14 @@ public class Map {
         room7.addItem("torch", "A torch hanging at the wall, that could help light up dark places");
         room8.addItem("shield", "A shield that seems to have a royal crest on it");
 
+        //Tilføjet mad til nogle af de forskellige rum, de er tilføjet med addFood metoden, denne metode tilføjer dem til samme "items" array som de resterende items.
+        room2.addFood("Big apple", "A big shiny red apple",15 );
+        room4.addFood("Can of beans", "A can of beans, but you're alergic to beans", -20);
+        room5.addFood("Chickens", "1 chickens walking around the room, to take ", 50);
+        room6.addFood("Taco", "A delicious looking taco", -25);
+        room8.addFood("A rotten tomato", "A disgusting looking tomato but still edible", 5);
+
+
         starterRoom = room1;
     }
 
