@@ -146,7 +146,7 @@ public class Player {
     }
 
     public Item dropItem(String itemName) {
-        for(Item item: currentRoom.getItems()) {
+        for(Item item: inventory) {
             if(item.getItemName().equals(itemName)) {
                 currentRoom.getItems().add(item);
                 inventory.remove(item);
