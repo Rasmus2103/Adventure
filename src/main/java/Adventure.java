@@ -10,24 +10,24 @@ public class Adventure {
                 player = new Player(adventureMap.getStarterRoom());
         }
 
-        public boolean goNorth() {
-               return player.goNorth();
+        public boolean go(String direction) {
+                return player.move(direction);
         }
 
-        public boolean goSouth() {
-                return player.goSouth();
+        public boolean takeItem(String itemName) {
+               return player.takeItem(itemName);
         }
 
-        public boolean goWest() {
-                return player.goWest();
-        }
-
-        public boolean goEast() {
-                return player.goEast();
+        public boolean dropItem(String itemName) {
+                return player.dropItem(itemName);
         }
 
         public Player getPlayer() {
                 return player;
+        }
+
+        public Eat playerEat(String itemName) {
+              return player.eat(itemName);
         }
 
         public Room getCurrentRoom() {

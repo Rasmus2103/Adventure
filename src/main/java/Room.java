@@ -28,19 +28,13 @@ private ArrayList<Item> items;
         items.add(item1);
     }
 
-    public Item takeItem(String itemName, UserInterface UI){
-        Item item = findItem(itemName, this);
-        if (item == null){
-            UI.itemDoesNotExist(itemName);
-        } else {
-            removeItem(item, this);
-        }
-
-        return item;
+    public void addFood(String itemName, String itemDescription, int health){
+        Food food = new Food(itemName, itemDescription, health);
+        items.add(food);
     }
 
-    public Item findItem(String itemName, Room currentRoom){
-            for (Item item : currentRoom.getItems()) {
+    public Item findItem(String itemName){
+            for (Item item : items) {
                 if (item.getItemName().equalsIgnoreCase(itemName)){
                     return item;
                 }
@@ -90,9 +84,5 @@ private ArrayList<Item> items;
 
     public ArrayList<Item> getItems() {
         return items;
-    }
-
-    public void removeItem() {
-
     }
 }

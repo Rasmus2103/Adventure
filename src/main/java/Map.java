@@ -2,7 +2,6 @@
 public class Map {
     private Room starterRoom = new Room();
 
-
     //Fjernet new adventure objektet, da det ikke er relateret til adventure objektet der blev brugt til at sætte map.currentRoom værdien.
     //Da det var to forskellige objekter, har vi fjernet det ene, så vi altid bruger det samme adventure objekt.
     //Derfor er det tilføjet som en parameter i mapRooms metoden
@@ -36,22 +35,18 @@ public class Map {
         room7.addItem("torch", "A torch hanging at the wall, that could help light up dark places");
         room8.addItem("shield", "A shield that seems to have a royal crest on it");
 
+        room2.addFood("apple", "A big shiny red apple",15 );
+        room4.addFood("beans", "A can of beans, but you're alergic to beans", -20);
+        room5.addFood("chicken", "1 chickens walking around the room, to take ", 50);
+        room6.addFood("taco", "A delicious looking taco", -25);
+        room8.addFood("tomato", "A disgusting looking tomato but still edible", 5);
+
         starterRoom = room1;
     }
 
     public void removeItems(Item item) {
         starterRoom.removeItem(item, starterRoom);
     }
-
-    /*public void showInventoryPlayer(UserInterface UI) {
-        if(player.getInventory().size() == 0) {
-            UI.noInventory(player);
-        } else {
-            for(int i =0; i < player.getInventory().size(); i++) {
-                UI.printInventory(player.getInventory(), i);
-            }
-        }
-    }*/
 
 
     public Room getStarterRoom() {

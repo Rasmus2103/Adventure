@@ -14,8 +14,56 @@ public class UserInterface {
         //Fjernet map.Map() da den ikke skal kaldes så langt nede, ellers vil currentRoom aldrig blive sat med korrekte værdier.
         while (true) {
             String choice = returnUserChoice();
+            String userChoice = null;
+            String[] userInputs = choice.split(" ");
+            String command = userInputs[0];
+            if(userInputs.length > 1) {
+                userChoice = userInputs[1];
+            }
+            if(userInputs.length > 1) {
+                userChoice = userInputs[1];
+            }
+            switch (command){
+                case "go":
+                    if(adventure.go(userChoice)) {
+                        System.out.println(adventure.getCurrentRoom().getDescription());
+                    } else {
+                        System.out.println("You cannot go that way");
+                    }
+                    break;
+                case "exit":
+                    exiting();
+                    break;
+                case "help":
+                    help();
+                    break;
+                case "look":
+                    looking();
+                    break;
+                case "take":
+                    if(adventure.takeItem(userChoice)) {
+                        System.out.println("You have taken " + userChoice);
+                    } else {
+                        System.out.println("There is no item called " + userChoice);
+                    }
+                    break;
+                case "drop":
+                    if(adventure.dropItem(userChoice)) {
+                        System.out.println("You have dropped "+ userChoice);
+                    } else {
+                        System.out.println("There is no item called " + userChoice);
+                    }
+                    break;
+                case "inventory":
+                    System.out.println(adventure.getPlayer().getInventory());
+                    break;
+                case "eat":
+                    eat(userChoice);
+                    health();
+                    break;
+            }
 
-            if (choice.equalsIgnoreCase("Go north")) {
+            /*if (choice.equalsIgnoreCase("Go north")) {
                 boolean succes = adventure.goNorth();
                 if(succes) {
                     System.out.println(adventure.getCurrentRoom().getDescription());
@@ -32,12 +80,22 @@ public class UserInterface {
                 }
             }
             else if (choice.equalsIgnoreCase("Go east")) {
-                adventure.goEast();
+                boolean succes = adventure.goEast();
+                if(succes) {
+                    System.out.println(adventure.getCurrentRoom().getDescription());
+                } else {
+                    System.out.println("You cannot go that way");
+                }
             }
             else if (choice.equalsIgnoreCase("Go west")) {
-                adventure.goWest();
+                boolean succes = adventure.goWest();
+                if(succes) {
+                    System.out.println(adventure.getCurrentRoom().getDescription());
+                } else {
+                    System.out.println("You cannot go that way");
+                }
             }
-            else if (choice.equalsIgnoreCase("Exit")) {
+            if (choice.equalsIgnoreCase("Exit")) {
                 exiting();
             }
             else if (choice.equalsIgnoreCase("Help")) {
@@ -47,7 +105,7 @@ public class UserInterface {
                 looking();
             }
             else if(choice.equalsIgnoreCase("Show items")) {
-                System.out.println(adventure.getCurrentRoom().getItems());
+                printItemsInRoom();
             }
             else if (choice.equalsIgnoreCase("Take item")) {
                 Scanner sc = new Scanner(System.in);
@@ -64,15 +122,27 @@ public class UserInterface {
             else if(choice.equalsIgnoreCase("Inventory")) {
                 System.out.println(adventure.getPlayer().getInventory());
             }
+            else if (choice.equalsIgnoreCase("Eat")) {
+                eat(choice);
+            }
             else {
                 youCannotWriteThat();
-            }
+            }*/
         }
 
     }
 
+    public void printItemsInRoom() {
+        Room currentRoom = adventure.getCurrentRoom();
+        for(Item item: currentRoom.getItems()) {
+            System.out.println(item.getItemName());
+            System.out.println(item.getItemDescription());
+        }
+    }
+
     public void welcome() {
         System.out.println("Welcome to the Adventure Game");
+        System.out.println("Enter a command to proceed, and write help if your in doubt");
     }
 
     public String returnUserChoice(){
@@ -86,8 +156,11 @@ public class UserInterface {
 
     public void help(){
         System.out.println("You can write go north, south, west or east to go in a direction" +
-                " \nlook to see what room you are in, and a description" +
-                " \nexit to leave the game");
+                "\nlook to see what room you are in, and a description" +
+                "\ntake item to add the item in the room to your inventory" +
+                "\ndrop item to drop an item in your inventory to currentroom you are in" +
+                "\ninventory to check what's in your inventory" +
+                "\nexit to leave the game");
     }
 
     public void itemDoesNotExist(String itemName){
@@ -131,21 +204,13 @@ public class UserInterface {
         System.out.println(description);
     }
 
-    public void printItemsInRoom(int i, Room currentRoom) {
+    /*public void printItemsInRoom(int i, Room currentRoom) {
         System.out.println(currentRoom.getItems().get(i).getItemName());
         System.out.println(currentRoom.getItems().get(i).getItemDescription());
-    }
+    }*/
 
     public void printItems(ArrayList<Item> items) {
         System.out.println(items.toString());
-    }
-
-    public void printInventory() {
-
-    }
-
-    public void noInventory(Player player) {
-        System.out.println("There is nothing in your inventory");
     }
 
     public void showTakenItem(Item i) {
@@ -160,7 +225,29 @@ public class UserInterface {
         if(i == null) {
             System.out.println("You have no item to drop");
         } else {
-            System.out.println("You have dropped a " + i.getItemName());
+            System.out.println("You have dropped " + i.getItemName());
+        }
+    }
+
+    public void health() {
+        System.out.println("Your current health is: " + adventure.getPlayer().getHealth());
+    }
+
+    public void notEdible(Player player){
+        System.out.println("You can't eat that");
+    }
+
+    public void eat(String name){
+        switch (adventure.playerEat(name)) {
+            case EDIBLE:
+                System.out.println("You ate " + name + " and gained " + adventure.getPlayer().getHealth() + " health");
+                break;
+            case NOT_EDIBLE:
+                System.out.println(name + " is not edible");
+                break;
+            case NOT_FOUND:
+                System.out.println("There is no such food");
+                break;
         }
     }
 
