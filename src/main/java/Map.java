@@ -28,8 +28,8 @@ public class Map {
         room9.setRoom(room6, null, room8, null);
 
         room2.addItem("lamp", "A old lamp hanging at the wall");
-        room3.addItem("health potion", "A potion that seems to have healing powers");
-        room5.addItem("bag of gold", "A shiny bag bag of gold");
+        room3.addItem("potion", "A potion that seems to have healing powers");
+        room5.addItem("gold", "A shiny bag bag of gold");
         room6.addItem("map", "An old map, seems like it could lead to something valuable");
         room7.addItem("torch", "A torch hanging at the wall, that could help light up dark places");
         room8.addItem("shield", "A shield that seems to have a royal crest on it");
@@ -40,14 +40,11 @@ public class Map {
         room6.addFood("taco", "A delicious looking taco", -25);
         room8.addFood("tomato", "A disgusting looking tomato but still edible", 5);
 
-        room4.addWeapon("sword", "A shiny sword that help you fight the giant");
-
+        room4.addMeleeWeapons("sword", "A shiny sword that help you fight the giant", 20);
+        room7.addMeleeWeapons("axe", "A really big axe", 30);
+        room5.addRangedWeapon("crowsbow", "a crowsbow to use for ranged attacks", 40, 1);
 
         starterRoom = room1;
-    }
-
-    public void removeItems(Item item) {
-        starterRoom.removeItem(item, starterRoom);
     }
 
 

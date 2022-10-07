@@ -43,11 +43,20 @@ public class UserInterface {
                     dropItem(userChoice);
                     break;
                 case "i":
-                    System.out.println(adventure.getPlayer().getInventory());
+                    showInventory();
                     break;
                 case "eat":
                     eat(userChoice);
                     health();
+                    break;
+                case "equip":
+                    equipWeapon(userChoice);
+                    break;
+                case "attack":
+                    attackMeleeWeapon(userChoice);
+                    break;
+                case "fire":
+                    attackRangedWeapon(userChoice);
                     break;
                 default:
                     youCannotWriteThat();
@@ -86,6 +95,10 @@ public class UserInterface {
         } else {
             System.out.println("There is no item called " + userChoice);
         }
+    }
+
+    public void showInventory() {
+        System.out.println(adventure.getPlayer().getInventory());
     }
 
     public void welcome() {
@@ -156,6 +169,57 @@ public class UserInterface {
                 break;
         }
     }
+
+    public void equipWeapon(String currentWeapon) {
+        switch (adventure.playerEquip(currentWeapon)) {
+            case EQUIPPED:
+                System.out.println("You equipped " + currentWeapon);
+                break;
+            case NOT_USABLE:
+                System.out.println(currentWeapon + " is not a weapon");
+                break;
+            case NOT_FOUND:
+                System.out.println("There is no such weapon");
+                break;
+        }
+    }
+
+    public void attackMeleeWeapon(String currentWeapon) {
+        switch (adventure.playerMeleeAttack(currentWeapon)) {
+            case MELEE_ATTACK:
+                System.out.println("You attacked with your Melee Weapon");
+                break;
+            case NOT_EQUIPPED:
+                System.out.println("You do not have a weapon equipped");
+                break;
+        }
+    }
+
+    public void attackRangedWeapon(String currentWeapon) {
+        switch (adventure.playerRangedAttack(currentWeapon)) {
+            case RANGED_ATTACK:
+                System.out.println("You have fired with your Ranged weapon");
+                break;
+            case NO_AMMO:
+                System.out.println("You have no ammo left");
+                break;
+            case NOT_EQUIPPED:
+                System.out.println("You do not have a weapon equipped");
+                break;
+        }
+    }
+
+    /*public void attackMeleeWeapon2() {
+        ReturnMessage goodAttack = adventure.playerAttack2();
+        switch (goodAttack) {
+            case MELEE_ATTACK:
+                System.out.println("You attacked with " + adventure.getPlayer().getCurrentWeapon());
+                break;
+            case NOT_EQUIPPED:
+                System.out.println("You do not have a weapon equipped");
+                break;
+        }
+    }*/
 
     public void youCannotWriteThat() {
         System.out.println("You cannot write that");

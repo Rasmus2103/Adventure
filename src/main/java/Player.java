@@ -4,6 +4,7 @@ public class Player {
     private Room currentRoom;
     private String name;
     private int health;
+    private Weapons currentWeapon;
     private ArrayList<Item> inventory;
 
     public Player(Room currentRoom) {
@@ -11,6 +12,7 @@ public class Player {
         this.name = "";
         inventory = new ArrayList<>();
         this.health = 50;
+        this.currentWeapon = null;
     }
 
     public boolean move(String direction) {
@@ -71,6 +73,14 @@ public class Player {
         return currentRoom;
     }
 
+    public Weapons getCurrentWeapon() {
+        return currentWeapon;
+    }
+
+    public void setCurrentWeapon(Weapons currentWeapon) {
+        this.currentWeapon = currentWeapon;
+    }
+
     public String getName() {
         return name;
     }
@@ -87,9 +97,11 @@ public class Player {
         Item itemFromInventory = searchInventoryPlayer(name);
         if(isEdible(itemFromInventory)){
             health += ((Food)itemFromInventory).getHealthPoints();
+            inventory.remove(itemFromInventory);
             return Eat.EDIBLE;
         } else if(isNotGood(itemFromInventory)) {
             health += ((Food)itemFromInventory).getHealthPoints();
+            inventory.remove(itemFromInventory);
             return Eat.NOT_GOOD;
         }
         else {
@@ -132,5 +144,54 @@ public class Player {
         }
         return false;
     }
+
+    public ReturnMessage equip(String weaponName) {
+        Item itemFromInventory = searchInventoryPlayer(weaponName);
+        if(itemFromInventory == null) {
+            //Hvis der ikke er et våben i inventory, siger den at den ikke kan finde det
+            return ReturnMessage.NOT_FOUND;
+        } else {
+            if(itemFromInventory instanceof Weapons) {
+                //equip player hvis det er et våben i inventory, og samtidig fjerner det fra inventory
+                setCurrentWeapon((Weapons) itemFromInventory);
+                return ReturnMessage.EQUIPPED;
+            } else {
+                //kan ikke equippes hvis det man skriver ikke er et våben
+                return ReturnMessage.NOT_USABLE;
+            }
+        }
+    }
+
+    public ReturnMessage meleeAttack(String weaponName) {
+        Item itemFromInventory = searchInventoryPlayer(weaponName);
+        if(currentWeapon != null) {
+            currentWeapon = (Weapons) itemFromInventory;
+            return ReturnMessage.MELEE_ATTACK;
+        } else {
+            return ReturnMessage.NOT_EQUIPPED;
+        }
+    }
+
+    public ReturnMessage rangedAttack(String weaponName) {
+        Item itemFromInventory = searchInventoryPlayer(weaponName);
+        if(currentWeapon != null) {
+            currentWeapon = (Weapons) itemFromInventory;
+            return ReturnMessage.RANGED_ATTACK;
+        }
+        else {
+            return ReturnMessage.NOT_EQUIPPED;
+        }
+    }
+
+    /*public ReturnMessage attack2() {
+        if(currentWeapon instanceof Weapons) {
+            return currentWeapon.attack();
+        }
+        return ReturnMessage.NOT_EQUIPPED;
+    }*/
+
+    /*public String healthDescription() {
+
+    }*/
 
 }
