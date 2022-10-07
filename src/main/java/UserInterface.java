@@ -25,11 +25,7 @@ public class UserInterface {
             }
             switch (command){
                 case "go":
-                    if(adventure.go(userChoice)) {
-                        System.out.println(adventure.getCurrentRoom().getDescription());
-                    } else {
-                        System.out.println("You cannot go that way");
-                    }
+                    goMove(userChoice);
                     break;
                 case "exit":
                     exiting();
@@ -41,93 +37,21 @@ public class UserInterface {
                     looking();
                     break;
                 case "take":
-                    if(adventure.takeItem(userChoice)) {
-                        System.out.println("You have taken " + userChoice);
-                    } else {
-                        System.out.println("There is no item called " + userChoice);
-                    }
+                    takeItem(userChoice);
                     break;
                 case "drop":
-                    if(adventure.dropItem(userChoice)) {
-                        System.out.println("You have dropped "+ userChoice);
-                    } else {
-                        System.out.println("There is no item called " + userChoice);
-                    }
+                    dropItem(userChoice);
                     break;
-                case "inventory":
+                case "i":
                     System.out.println(adventure.getPlayer().getInventory());
                     break;
                 case "eat":
                     eat(userChoice);
                     health();
                     break;
+                default:
+                    youCannotWriteThat();
             }
-
-            /*if (choice.equalsIgnoreCase("Go north")) {
-                boolean succes = adventure.goNorth();
-                if(succes) {
-                    System.out.println(adventure.getCurrentRoom().getDescription());
-                } else {
-                    System.out.println("You cannot go that way");
-                }
-            }
-            else if (choice.equalsIgnoreCase("Go south")) {
-                boolean succes = adventure.goSouth();
-                if(succes) {
-                    System.out.println(adventure.getCurrentRoom().getDescription());
-                } else {
-                    System.out.println("You cannot go that way");
-                }
-            }
-            else if (choice.equalsIgnoreCase("Go east")) {
-                boolean succes = adventure.goEast();
-                if(succes) {
-                    System.out.println(adventure.getCurrentRoom().getDescription());
-                } else {
-                    System.out.println("You cannot go that way");
-                }
-            }
-            else if (choice.equalsIgnoreCase("Go west")) {
-                boolean succes = adventure.goWest();
-                if(succes) {
-                    System.out.println(adventure.getCurrentRoom().getDescription());
-                } else {
-                    System.out.println("You cannot go that way");
-                }
-            }
-            if (choice.equalsIgnoreCase("Exit")) {
-                exiting();
-            }
-            else if (choice.equalsIgnoreCase("Help")) {
-                help();
-            }
-            else if (choice.equalsIgnoreCase("Look")) {
-                looking();
-            }
-            else if(choice.equalsIgnoreCase("Show items")) {
-                printItemsInRoom();
-            }
-            else if (choice.equalsIgnoreCase("Take item")) {
-                Scanner sc = new Scanner(System.in);
-                String itemName = sc.nextLine();
-                Item i = adventure.getPlayer().takeItem(itemName);
-                showTakenItem(i);
-            }
-            else if(choice.equalsIgnoreCase("Drop item")) {
-                Scanner sc = new Scanner(System.in);
-                String itemName = sc.nextLine();
-                Item i = adventure.getPlayer().dropItem(itemName);
-                showDroppedItem(i);
-            }
-            else if(choice.equalsIgnoreCase("Inventory")) {
-                System.out.println(adventure.getPlayer().getInventory());
-            }
-            else if (choice.equalsIgnoreCase("Eat")) {
-                eat(choice);
-            }
-            else {
-                youCannotWriteThat();
-            }*/
         }
 
     }
@@ -137,6 +61,30 @@ public class UserInterface {
         for(Item item: currentRoom.getItems()) {
             System.out.println(item.getItemName());
             System.out.println(item.getItemDescription());
+        }
+    }
+
+    public void goMove(String userChoice) {
+        if(adventure.go(userChoice)) {
+            System.out.println(adventure.getCurrentRoom().getDescription());
+        } else {
+            System.out.println("You cannot go that way");
+        }
+    }
+
+    public void takeItem(String userChoice) {
+        if(adventure.takeItem(userChoice)) {
+            System.out.println("You have taken " + userChoice);
+        } else {
+            System.out.println("There is no item called " + userChoice);
+        }
+    }
+
+    public void dropItem(String userChoice) {
+        if(adventure.dropItem(userChoice)) {
+            System.out.println("You have dropped "+ userChoice);
+        } else {
+            System.out.println("There is no item called " + userChoice);
         }
     }
 
@@ -184,57 +132,13 @@ public class UserInterface {
 
     }
 
-    public void youCantGoNorth(){
-        System.out.println("You cannot go north");
-    }
-
-    public void cannotGoSouth() {
-        System.out.println("You cannot go south");
-    }
-
-    public void cannotGoEast() {
-        System.out.println("You cannot go east");
-    }
-
-    public void cannotGoWest() {
-        System.out.println("You cannot go west");
-    }
-
-    public void goingWest(String description) {
-        System.out.println(description);
-    }
-
-    /*public void printItemsInRoom(int i, Room currentRoom) {
-        System.out.println(currentRoom.getItems().get(i).getItemName());
-        System.out.println(currentRoom.getItems().get(i).getItemDescription());
-    }*/
-
     public void printItems(ArrayList<Item> items) {
         System.out.println(items.toString());
     }
 
-    public void showTakenItem(Item i) {
-        if(i == null) {
-            System.out.println("No such item");
-        } else {
-            System.out.println("You have taken a " + i.getItemName());
-        }
-    }
-
-    public void showDroppedItem(Item i) {
-        if(i == null) {
-            System.out.println("You have no item to drop");
-        } else {
-            System.out.println("You have dropped " + i.getItemName());
-        }
-    }
 
     public void health() {
         System.out.println("Your current health is: " + adventure.getPlayer().getHealth());
-    }
-
-    public void notEdible(Player player){
-        System.out.println("You can't eat that");
     }
 
     public void eat(String name){
@@ -242,6 +146,8 @@ public class UserInterface {
             case EDIBLE:
                 System.out.println("You ate " + name + " and gained " + adventure.getPlayer().getHealth() + " health");
                 break;
+            case NOT_GOOD:
+                System.out.println("You ate " + name + " and lost " + adventure.getPlayer().getHealth() + " health");
             case NOT_EDIBLE:
                 System.out.println(name + " is not edible");
                 break;

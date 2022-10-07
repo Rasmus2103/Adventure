@@ -34,42 +34,6 @@ public class Player {
         }
     }
 
-    /*public boolean goNorth() {
-        if(currentRoom.getNorth() == null) {
-            return false;
-        } else {
-            currentRoom = currentRoom.getNorth();
-            return true;
-        }
-    }
-
-    public boolean goSouth() {
-        if(currentRoom.getSouth() == null) {
-            return false;
-        } else {
-            currentRoom = currentRoom.getSouth();
-            return true;
-        }
-    }
-
-    public boolean goWest() {
-        if(currentRoom.getWest() == null) {
-            return false;
-        } else {
-            currentRoom = currentRoom.getWest();
-            return true;
-        }
-    }
-
-    public boolean goEast() {
-        if(currentRoom.getEast() == null) {
-            return false;
-        } else {
-            currentRoom = currentRoom.getEast();
-            return true;
-        }
-    }*/
-
     public String look() {
         return currentRoom.getName() + currentRoom.getDescription();
     }
@@ -124,7 +88,11 @@ public class Player {
         if(isEdible(itemFromInventory)){
             health += ((Food)itemFromInventory).getHealthPoints();
             return Eat.EDIBLE;
-        } else {
+        } else if(isNotGood(itemFromInventory)) {
+            health += ((Food)itemFromInventory).getHealthPoints();
+            return Eat.NOT_GOOD;
+        }
+        else {
             if(itemFromInventory == null){
                 return Eat.NOT_FOUND;
             } else {
@@ -132,37 +100,14 @@ public class Player {
             }
         }
 
-
-        /*Item itemFromInventory = searchInventoryPlayer(name); //Hentes fra inventory kan være null
-        Item itemFromRoom = currentRoom.findItem(name); //Hentes fra room kan være null
-        if (itemFromInventory == null && itemFromRoom == null){ //Vi tjekker om de begge er null
-            itemDoesNotExist(name); //Hvis begge er null skriver vi en tekst ud med at item ikke findes
-
-        }else if(itemFromInventory != null){ //Hvis item findes i inventory
-            if (isEdible(itemFromInventory)){ //Hvis item "kan spises" en item kan spises hvis metoden isEdible returnere true
-                health += ((Food) itemFromInventory).healthPoints; //Vi caster "item" til food hvilket er muligt, da denne item er en instance of food. altså den er edible
-                // vi tilføjer og sætter = livet i forhold til hvor mange healthPoints item har.
-                eat(name, ((Food) itemFromInventory).healthPoints); //Vi kalder udskrivnings metoden fra UI.
-                removeItemPlayer(itemFromInventory); //Vi fjerner item fra player altså efter man har spist den er den væk.
-            }else {
-                notEdible();//Hvis man ikke kan spise den item altså det ikke er en instance of food, udskriver vi den ikke kan spises.
-
-            }
-        }else if (itemFromRoom != null) { //Hvis item findes i rummet
-            if (isEdible(itemFromRoom)){ //Hvis item er edible
-                health += ((Food) itemFromRoom).healthPoints; //Vi caster item da den er edible, altså er typen "food" som nedarver fra item
-                //Hvis man caster en item som ikke er typen food, vil man få en fejl.
-                eat(name, ((Food) itemFromRoom).healthPoints); //Vi kalder udskrivnings metoden
-                currentRoom.removeItem(itemFromRoom, currentRoom); //Vi fjerner item fra currentRoom da vi har spist den
-            }else {
-                notEdible(); //Vi skriver at man ikke kan spise item
-            }
-        }*/
-
     }
     //Hvis Item er en instance of Food, som betyder hvis denne item er typen food, returner dernæst true, ellers returner false.
     //Det bruger vi til at sikre, at vi ikke forsøger at cast en item som ikke er "food" da alle food er en item, men ikke alle item er en food.
     public boolean isEdible(Item item){
+        return item instanceof Food;
+    }
+
+    public boolean isNotGood(Item item) {
         return item instanceof Food;
     }
 

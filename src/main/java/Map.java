@@ -29,7 +29,6 @@ public class Map {
 
         room2.addItem("lamp", "A old lamp hanging at the wall");
         room3.addItem("health potion", "A potion that seems to have healing powers");
-        room4.addItem("sword", "A shiny sword that help you fight the giant");
         room5.addItem("bag of gold", "A shiny bag bag of gold");
         room6.addItem("map", "An old map, seems like it could lead to something valuable");
         room7.addItem("torch", "A torch hanging at the wall, that could help light up dark places");
@@ -40,6 +39,9 @@ public class Map {
         room5.addFood("chicken", "1 chickens walking around the room, to take ", 50);
         room6.addFood("taco", "A delicious looking taco", -25);
         room8.addFood("tomato", "A disgusting looking tomato but still edible", 5);
+
+        room4.addWeapon("sword", "A shiny sword that help you fight the giant");
+
 
         starterRoom = room1;
     }

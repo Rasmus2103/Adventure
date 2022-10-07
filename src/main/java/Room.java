@@ -33,6 +33,11 @@ private ArrayList<Item> items;
         items.add(food);
     }
 
+    public void addWeapon(String itemName, String itemDescription) {
+        Weapons weapons = new Weapons(itemName, itemDescription);
+        items.add(weapons);
+    }
+
     public Item findItem(String itemName){
             for (Item item : items) {
                 if (item.getItemName().equalsIgnoreCase(itemName)){
