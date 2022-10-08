@@ -34,15 +34,16 @@ public class Map {
         room7.addItem("torch", "A torch hanging at the wall, that could help light up dark places");
         room8.addItem("shield", "A shield that seems to have a royal crest on it");
 
-        room2.addFood("apple", "A big shiny red apple",15 );
+        room2.addFood("apple", "A big shiny red apple",15);
         room4.addFood("beans", "A can of beans, but you're alergic to beans", -20);
         room5.addFood("chicken", "1 chickens walking around the room, to take ", 50);
         room6.addFood("taco", "A delicious looking taco", -25);
         room8.addFood("tomato", "A disgusting looking tomato but still edible", 5);
 
+        room2.addRangedWeapon("slingshot", "A slingshot that can might do some slight damage", 5);
         room4.addMeleeWeapons("sword", "A shiny sword that help you fight the giant", 20);
-        room7.addMeleeWeapons("axe", "A really big axe", 30);
         room5.addRangedWeapon("crowsbow", "a crowsbow to use for ranged attacks", 40);
+        room7.addMeleeWeapons("axe", "A really big axe", 30);
 
         starterRoom = room1;
     }

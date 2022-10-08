@@ -162,6 +162,7 @@ public class UserInterface {
                 break;
             case NOT_GOOD:
                 System.out.println("You ate " + name + " and lost " + adventure.getPlayer().getHealth() + " health");
+                break;
             case NOT_EDIBLE:
                 System.out.println(name + " is not edible");
                 break;
@@ -192,7 +193,7 @@ public class UserInterface {
                 System.out.println("You attacked with your Melee Weapon");
                 break;
             case NOT_EQUIPPED:
-                System.out.println("You do not have a weapon equipped");
+                System.out.println("You do not have a Melee weapon equipped");
                 break;
         }
     }
@@ -221,7 +222,7 @@ public class UserInterface {
                 System.out.println("You have no ammo left");
                 break;
             case NOT_EQUIPPED:
-                System.out.println("You do not have a weapon equipped");
+                System.out.println("You do not have a Ranged weapon equipped");
                 break;
         }
     }

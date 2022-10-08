@@ -2,13 +2,13 @@ import java.util.ArrayList;
 
 public class Room {
 
-private String name;
-private String description;
-private Room east;
-private Room north;
-private Room south;
-private Room west;
-private ArrayList<Item> items;
+    private String name;
+    private String description;
+    private Room east;
+    private Room north;
+    private Room south;
+    private Room west;
+    private ArrayList<Item> items;
 
     public Room(String name, String description) {
         this.name = name;
@@ -49,11 +49,11 @@ private ArrayList<Item> items;
     }
 
     public Item findItem(String itemName){
-            for (Item item : items) {
-                if (item.getItemName().equalsIgnoreCase(itemName)){
-                    return item;
-                }
+        for (Item item : items) {
+            if (item.getItemName().equalsIgnoreCase(itemName)){
+                return item;
             }
+        }
         return null;
     }
 

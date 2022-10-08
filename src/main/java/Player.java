@@ -89,14 +89,14 @@ public class Player {
         return health;
     }
 
-    public void setHealth(Item item) {
+    /*public void setHealth(Item item) {
         if (item instanceof Food) {
             this.health += 20;
         }
         if (health > 50) {
             health = 50;
         }
-    }
+    }*/
 
     public ArrayList<Item> getInventory() {
         return inventory;
@@ -107,7 +107,6 @@ public class Player {
         if(isEdible(itemFromInventory)){
             health += ((Food)itemFromInventory).getHealthPoints();
             inventory.remove(itemFromInventory);
-            setHealth(itemFromInventory);
             return Eat.EDIBLE;
         } else if(isNotGood(itemFromInventory)) {
             health += ((Food)itemFromInventory).getHealthPoints();
@@ -199,9 +198,5 @@ public class Player {
         }
         return ReturnMessage.NOT_EQUIPPED;
     }
-
-    /*public String healthDescription() {
-
-    }*/
 
 }
