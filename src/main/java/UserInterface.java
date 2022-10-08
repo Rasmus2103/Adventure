@@ -17,13 +17,13 @@ public class UserInterface {
             String userChoice = null;
             String[] userInputs = choice.split(" ");
             String command = userInputs[0];
-            if(userInputs.length > 1) {
+            if (userInputs.length > 1) {
                 userChoice = userInputs[1];
             }
-            if(userInputs.length > 1) {
+            if (userInputs.length > 1) {
                 userChoice = userInputs[1];
             }
-            switch (command){
+            switch (command) {
                 case "go":
                     goMove(userChoice);
                     break;
@@ -49,14 +49,15 @@ public class UserInterface {
                     eat(userChoice);
                     health();
                     break;
+                case "health":
+                    showHealth();
+                    break;
                 case "equip":
                     equipWeapon(userChoice);
                     break;
                 case "attack":
-                    attackMeleeWeapon(userChoice);
-                    break;
-                case "fire":
-                    attackRangedWeapon(userChoice);
+                    attackMeleeWeapon();
+                    attackRangedWeapon();
                     break;
                 default:
                     youCannotWriteThat();
@@ -67,14 +68,14 @@ public class UserInterface {
 
     public void printItemsInRoom() {
         Room currentRoom = adventure.getCurrentRoom();
-        for(Item item: currentRoom.getItems()) {
+        for (Item item : currentRoom.getItems()) {
             System.out.println(item.getItemName());
             System.out.println(item.getItemDescription());
         }
     }
 
     public void goMove(String userChoice) {
-        if(adventure.go(userChoice)) {
+        if (adventure.go(userChoice)) {
             System.out.println(adventure.getCurrentRoom().getDescription());
         } else {
             System.out.println("You cannot go that way");
@@ -82,7 +83,7 @@ public class UserInterface {
     }
 
     public void takeItem(String userChoice) {
-        if(adventure.takeItem(userChoice)) {
+        if (adventure.takeItem(userChoice)) {
             System.out.println("You have taken " + userChoice);
         } else {
             System.out.println("There is no item called " + userChoice);
@@ -90,8 +91,8 @@ public class UserInterface {
     }
 
     public void dropItem(String userChoice) {
-        if(adventure.dropItem(userChoice)) {
-            System.out.println("You have dropped "+ userChoice);
+        if (adventure.dropItem(userChoice)) {
+            System.out.println("You have dropped " + userChoice);
         } else {
             System.out.println("There is no item called " + userChoice);
         }
@@ -106,16 +107,16 @@ public class UserInterface {
         System.out.println("Enter a command to proceed, and write help if your in doubt");
     }
 
-    public String returnUserChoice(){
+    public String returnUserChoice() {
         return input.nextLine();
     }
 
-    public void exiting(){
+    public void exiting() {
         System.out.println("Exiting Thanks for playing");
         System.exit(0);
     }
 
-    public void help(){
+    public void help() {
         System.out.println("You can write go north, south, west or east to go in a direction" +
                 "\nlook to see what room you are in, and a description" +
                 "\ntake item to add the item in the room to your inventory" +
@@ -124,18 +125,18 @@ public class UserInterface {
                 "\nexit to leave the game");
     }
 
-    public void itemDoesNotExist(String itemName){
+    public void itemDoesNotExist(String itemName) {
         System.out.println("There is no " + itemName);
     }
 
-    public void looking(){
+    public void looking() {
         Room currentRoom = adventure.getCurrentRoom();
         System.out.println("Looking");
         System.out.println(currentRoom.getName());
         System.out.println(currentRoom.getDescription());
         System.out.println("You also look around to see if there is any items of value");
 
-        if (currentRoom.getItems().size()==0){
+        if (currentRoom.getItems().size() == 0) {
             System.out.println("There is no items");
         } else {
             for (Item item : currentRoom.getItems()) {
@@ -154,7 +155,7 @@ public class UserInterface {
         System.out.println("Your current health is: " + adventure.getPlayer().getHealth());
     }
 
-    public void eat(String name){
+    public void eat(String name) {
         switch (adventure.playerEat(name)) {
             case EDIBLE:
                 System.out.println("You ate " + name + " and gained " + adventure.getPlayer().getHealth() + " health");
@@ -184,8 +185,9 @@ public class UserInterface {
         }
     }
 
-    public void attackMeleeWeapon(String currentWeapon) {
-        switch (adventure.playerMeleeAttack(currentWeapon)) {
+    public void attackMeleeWeapon() {
+        ReturnMessage attack = adventure.playerAttack();
+        switch (attack) {
             case MELEE_ATTACK:
                 System.out.println("You attacked with your Melee Weapon");
                 break;
@@ -195,8 +197,23 @@ public class UserInterface {
         }
     }
 
-    public void attackRangedWeapon(String currentWeapon) {
-        switch (adventure.playerRangedAttack(currentWeapon)) {
+    /*public void attackRangedWeapon(String currentWeapon) {
+        switch (adventure.playerAttack(currentWeapon)) {
+            case RANGED_ATTACK:
+                System.out.println("You have fired with your Ranged weapon");
+                break;
+            case NO_AMMO:
+                System.out.println("You have no ammo left");
+                break;
+            case NOT_EQUIPPED:
+                System.out.println("You do not have a weapon equipped");
+                break;
+        }
+    }*/
+
+    public void attackRangedWeapon() {
+        ReturnMessage attack = adventure.playerAttack();
+        switch (attack) {
             case RANGED_ATTACK:
                 System.out.println("You have fired with your Ranged weapon");
                 break;
@@ -220,6 +237,20 @@ public class UserInterface {
                 break;
         }
     }*/
+
+    public void showHealth() {
+        int health = adventure.getPlayer().getHealth();
+        if (health > 0 && 25 >= health) {
+            System.out.println("Your health is " + health + " You are low in hp. Avoid fights and get food");
+        }
+        if (health > 25 && 50 > health) {
+            System.out.println("Your health is " + health + " You are kinda low, be careful with fights and get food");
+        }
+        if(health == 50) {
+            System.out.println("You are at full health");
+        }
+
+    }
 
     public void youCannotWriteThat() {
         System.out.println("You cannot write that");

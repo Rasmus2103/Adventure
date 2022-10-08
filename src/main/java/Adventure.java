@@ -34,17 +34,17 @@ public class Adventure {
                 return player.equip(itemName);
         }
 
-        public ReturnMessage playerMeleeAttack(String itemName) {
+        /*public ReturnMessage playerMeleeAttack(String itemName) {
                 return player.meleeAttack(itemName);
-        }
-
-        public ReturnMessage playerRangedAttack(String itemName) {
-                return player.rangedAttack(itemName);
-        }
-
-        /*public ReturnMessage playerAttack2() {
-                return player.attack2();
         }*/
+
+        /*public ReturnMessage playerRangedAttack(String itemName) {
+                return player.rangedAttack(itemName);
+        }*/
+
+        public ReturnMessage playerAttack() {
+                return player.attack();
+        }
 
         public Room getCurrentRoom() {
                 return player.getCurrentRoom();

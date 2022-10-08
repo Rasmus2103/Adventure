@@ -34,23 +34,18 @@ private ArrayList<Item> items;
     }
 
     public void addMeleeWeapons(String weaponName, String weaponDescription, int damage) {
-        Weapons weapons = new Weapons(weaponName, weaponDescription, damage) {
+        MeleeWeapons meleeWeapons = new MeleeWeapons(weaponName, weaponDescription, damage) {
             @Override
             public ReturnMessage attack() {
                 return ReturnMessage.MELEE_ATTACK;
             }
         };
-        items.add(weapons);
+        items.add(meleeWeapons);
     }
 
-    public void addRangedWeapon(String weaponName, String weaponDescription, int damage, int ammo) {
-        Weapons weapons = new Weapons(weaponName, weaponDescription, damage, ammo) {
-            @Override
-            public ReturnMessage attack() {
-                return ReturnMessage.RANGED_ATTACK;
-            }
-        };
-        items.add(weapons);
+    public void addRangedWeapon(String weaponName, String weaponDescription, int damage) {
+        RangedWeapons rangedWeapons = new RangedWeapons(weaponName, weaponDescription, damage);
+        items.add(rangedWeapons);
     }
 
     public Item findItem(String itemName){

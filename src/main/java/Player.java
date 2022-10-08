@@ -89,6 +89,15 @@ public class Player {
         return health;
     }
 
+    public void setHealth(Item item) {
+        if (item instanceof Food) {
+            this.health += 20;
+        }
+        if (health > 50) {
+            health = 50;
+        }
+    }
+
     public ArrayList<Item> getInventory() {
         return inventory;
     }
@@ -98,6 +107,7 @@ public class Player {
         if(isEdible(itemFromInventory)){
             health += ((Food)itemFromInventory).getHealthPoints();
             inventory.remove(itemFromInventory);
+            setHealth(itemFromInventory);
             return Eat.EDIBLE;
         } else if(isNotGood(itemFromInventory)) {
             health += ((Food)itemFromInventory).getHealthPoints();
@@ -162,7 +172,7 @@ public class Player {
         }
     }
 
-    public ReturnMessage meleeAttack(String weaponName) {
+    /*public ReturnMessage meleeAttack(String weaponName) {
         Item itemFromInventory = searchInventoryPlayer(weaponName);
         if(currentWeapon != null) {
             currentWeapon = (Weapons) itemFromInventory;
@@ -170,9 +180,9 @@ public class Player {
         } else {
             return ReturnMessage.NOT_EQUIPPED;
         }
-    }
+    }*/
 
-    public ReturnMessage rangedAttack(String weaponName) {
+    /*public ReturnMessage attack(String weaponName) {
         Item itemFromInventory = searchInventoryPlayer(weaponName);
         if(currentWeapon != null) {
             currentWeapon = (Weapons) itemFromInventory;
@@ -181,14 +191,14 @@ public class Player {
         else {
             return ReturnMessage.NOT_EQUIPPED;
         }
-    }
+    }*/
 
-    /*public ReturnMessage attack2() {
+    public ReturnMessage attack() {
         if(currentWeapon instanceof Weapons) {
             return currentWeapon.attack();
         }
         return ReturnMessage.NOT_EQUIPPED;
-    }*/
+    }
 
     /*public String healthDescription() {
 

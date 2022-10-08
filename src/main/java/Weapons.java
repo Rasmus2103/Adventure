@@ -13,8 +13,6 @@ public abstract class Weapons extends Item {
         this.ammo = ammo;
     }
 
-    //public abstract ReturnMessage attack();
-
     public int getDamage() {
         return damage;
     }

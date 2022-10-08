@@ -42,7 +42,7 @@ public class Map {
 
         room4.addMeleeWeapons("sword", "A shiny sword that help you fight the giant", 20);
         room7.addMeleeWeapons("axe", "A really big axe", 30);
-        room5.addRangedWeapon("crowsbow", "a crowsbow to use for ranged attacks", 40, 1);
+        room5.addRangedWeapon("crowsbow", "a crowsbow to use for ranged attacks", 40);
 
         starterRoom = room1;
     }
