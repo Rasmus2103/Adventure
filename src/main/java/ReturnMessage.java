@@ -7,5 +7,6 @@ public enum ReturnMessage {
     MELEE_ATTACK,
     RANGED_ATTACK,
     NOT_EQUIPPED,
-    NO_AMMO
+    NO_AMMO,
+    NOT_RIGHT_WEAPON
 }

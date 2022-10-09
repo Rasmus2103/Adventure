@@ -7,7 +7,6 @@ public class Adventure {
         public Adventure() {
                 adventureMap.mapRooms();
                 player = new Player(adventureMap.getStarterRoom());
-                //player = new Player(new Weapons("axe", "a really big axe", 30));
         }
 
         public boolean go(String direction) {
@@ -33,14 +32,6 @@ public class Adventure {
         public ReturnMessage playerEquip(String itemName) {
                 return player.equip(itemName);
         }
-
-        /*public ReturnMessage playerMeleeAttack(String itemName) {
-                return player.meleeAttack(itemName);
-        }*/
-
-        /*public ReturnMessage playerRangedAttack(String itemName) {
-                return player.rangedAttack(itemName);
-        }*/
 
         public ReturnMessage playerAttack() {
                 return player.attack();

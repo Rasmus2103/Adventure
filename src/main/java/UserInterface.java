@@ -57,6 +57,8 @@ public class UserInterface {
                     break;
                 case "attack":
                     attackMeleeWeapon();
+                    break;
+                case "fire":
                     attackRangedWeapon();
                     break;
                 default:
@@ -198,20 +200,6 @@ public class UserInterface {
         }
     }
 
-    /*public void attackRangedWeapon(String currentWeapon) {
-        switch (adventure.playerAttack(currentWeapon)) {
-            case RANGED_ATTACK:
-                System.out.println("You have fired with your Ranged weapon");
-                break;
-            case NO_AMMO:
-                System.out.println("You have no ammo left");
-                break;
-            case NOT_EQUIPPED:
-                System.out.println("You do not have a weapon equipped");
-                break;
-        }
-    }*/
-
     public void attackRangedWeapon() {
         ReturnMessage attack = adventure.playerAttack();
         switch (attack) {
@@ -227,17 +215,6 @@ public class UserInterface {
         }
     }
 
-    /*public void attackMeleeWeapon2() {
-        ReturnMessage goodAttack = adventure.playerAttack2();
-        switch (goodAttack) {
-            case MELEE_ATTACK:
-                System.out.println("You attacked with " + adventure.getPlayer().getCurrentWeapon());
-                break;
-            case NOT_EQUIPPED:
-                System.out.println("You do not have a weapon equipped");
-                break;
-        }
-    }*/
 
     public void showHealth() {
         int health = adventure.getPlayer().getHealth();

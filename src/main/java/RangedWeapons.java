@@ -1,6 +1,6 @@
 public class RangedWeapons extends Weapons {
 
-    private int ammo = 3;
+    private int ammo = 5;
     public RangedWeapons(String weaponName, String weaponDescription, int damage) {
         super(weaponName, weaponDescription, damage);
     }
@@ -13,5 +13,7 @@ public class RangedWeapons extends Weapons {
        ammo--;
        return ReturnMessage.RANGED_ATTACK;
     }
+
+
 
 }

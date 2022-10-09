@@ -42,7 +42,7 @@ public class Player {
 
     public Item searchInventoryPlayer(String name) {
         for(Item i: inventory) {
-            if(i.getItemName().equals(name)) {
+            if(i.getItemName().equalsIgnoreCase(name)) {
                 return i;
             }
         }
@@ -170,27 +170,6 @@ public class Player {
             }
         }
     }
-
-    /*public ReturnMessage meleeAttack(String weaponName) {
-        Item itemFromInventory = searchInventoryPlayer(weaponName);
-        if(currentWeapon != null) {
-            currentWeapon = (Weapons) itemFromInventory;
-            return ReturnMessage.MELEE_ATTACK;
-        } else {
-            return ReturnMessage.NOT_EQUIPPED;
-        }
-    }*/
-
-    /*public ReturnMessage attack(String weaponName) {
-        Item itemFromInventory = searchInventoryPlayer(weaponName);
-        if(currentWeapon != null) {
-            currentWeapon = (Weapons) itemFromInventory;
-            return ReturnMessage.RANGED_ATTACK;
-        }
-        else {
-            return ReturnMessage.NOT_EQUIPPED;
-        }
-    }*/
 
     public ReturnMessage attack() {
         if(currentWeapon instanceof Weapons) {
