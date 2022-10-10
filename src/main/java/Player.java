@@ -105,13 +105,15 @@ public class Player {
     public Eat eat(String name){
         Item itemFromInventory = searchInventoryPlayer(name);
         if(isEdible(itemFromInventory)){
-            health += ((Food)itemFromInventory).getHealthPoints();
-            inventory.remove(itemFromInventory);
-            return Eat.EDIBLE;
-        } else if(isNotGood(itemFromInventory)) {
-            health += ((Food)itemFromInventory).getHealthPoints();
-            inventory.remove(itemFromInventory);
-            return Eat.NOT_GOOD;
+            if(((Food)itemFromInventory).getHealthPoints() > 0) {
+                health += ((Food) itemFromInventory).getHealthPoints();
+                inventory.remove(itemFromInventory);
+                return Eat.EDIBLE;
+            } else {
+                health += ((Food) itemFromInventory).getHealthPoints();
+                inventory.remove(itemFromInventory);
+                return Eat.NOT_GOOD;
+            }
         }
         else {
             if(itemFromInventory == null){
@@ -125,10 +127,6 @@ public class Player {
     //Hvis Item er en instance of Food, som betyder hvis denne item er typen food, returner dernæst true, ellers returner false.
     //Det bruger vi til at sikre, at vi ikke forsøger at cast en item som ikke er "food" da alle food er en item, men ikke alle item er en food.
     public boolean isEdible(Item item){
-        return item instanceof Food;
-    }
-
-    public boolean isNotGood(Item item) {
         return item instanceof Food;
     }
 
@@ -148,6 +146,8 @@ public class Player {
             if(item.getItemName().equals(itemName)) {
                 currentRoom.getItems().add(item);
                 inventory.remove(item);
+                if (item.equals(getCurrentWeapon()))
+                    setCurrentWeapon(null);
                 return true;
             }
         }
@@ -161,7 +161,7 @@ public class Player {
             return ReturnMessage.NOT_FOUND;
         } else {
             if(itemFromInventory instanceof Weapons) {
-                //equip player hvis det er et våben i inventory, og samtidig fjerner det fra inventory
+                //equip player hvis det er et våben i inventory, det bliver IKKE fjernet fra inventory.
                 setCurrentWeapon((Weapons) itemFromInventory);
                 return ReturnMessage.EQUIPPED;
             } else {

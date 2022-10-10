@@ -160,10 +160,10 @@ public class UserInterface {
     public void eat(String name) {
         switch (adventure.playerEat(name)) {
             case EDIBLE:
-                System.out.println("You ate " + name + " and gained " + adventure.getPlayer().getHealth() + " health");
+                System.out.println("You ate some good " + name + " and you now have " + adventure.getPlayer().getHealth() + " health");
                 break;
             case NOT_GOOD:
-                System.out.println("You ate " + name + " and lost " + adventure.getPlayer().getHealth() + " health");
+                System.out.println("You ate some bad " + name + " and you now have " + adventure.getPlayer().getHealth() + " health");
                 break;
             case NOT_EDIBLE:
                 System.out.println(name + " is not edible");
