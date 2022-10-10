@@ -15,7 +15,7 @@ public class Map {
         Room room6 = new Room("Room 6", "room that has a shield hanging on the wall, take it or proceed to the next room");
         Room room7 = new Room("Room 7", "room that has pictures of Kings and Queens, only one door");
         Room room8 = new Room("Room 8", "room with two doors, what could they lead too?");
-        Room room9 = new Room("Room 9", "room with a minotaur that are the strongest creature, fight it or flee to the door");
+        Room room9 = new Room("Room 9", "room with a minotaur that are the strongest creature, fight it or flee through the door");
 
         room1.setRoom(null, room4, null, room2);
         room2.setRoom(null, null, room1, room3);
@@ -44,6 +44,7 @@ public class Map {
         room4.addMeleeWeapons("sword", "A shiny sword that help you fight the giant", 20);
         room5.addRangedWeapon("crowsbow", "a crowsbow to use for ranged attacks", 40);
         room9.addMeleeWeapons("axe", "A really big axe", 30);
+
 
         starterRoom = room1;
     }

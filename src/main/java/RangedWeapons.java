@@ -14,6 +14,10 @@ public class RangedWeapons extends Weapons {
        return ReturnMessage.RANGED_ATTACK;
     }
 
+    public String toString() {
+        return "Ammo: " + ammo;
+    }
+
 
 
 }

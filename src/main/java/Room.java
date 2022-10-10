@@ -9,6 +9,7 @@ public class Room {
     private Room south;
     private Room west;
     private ArrayList<Item> items;
+    private ArrayList<Enemy> enemies;
 
     public Room(String name, String description) {
         this.name = name;
@@ -48,6 +49,11 @@ public class Room {
         items.add(rangedWeapons);
     }
 
+    public void addEnemy(String enemyName, String enemyDescription, int health, int damage) {
+        Enemy enemy = new Enemy(enemyName, enemyDescription, health, damage);
+        enemies.add(enemy);
+    }
+
     public Item findItem(String itemName){
         for (Item item : items) {
             if (item.getItemName().equalsIgnoreCase(itemName)){
@@ -65,9 +71,6 @@ public class Room {
         UI.printItems(items);
     }
 
-
-
-    //return "Item" + ;
 
 
     public Room() {
