@@ -102,6 +102,10 @@ public class Player {
         return inventory;
     }
 
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
     public Eat eat(String name){
         Item itemFromInventory = searchInventoryPlayer(name);
         if(isEdible(itemFromInventory)){
@@ -172,19 +176,47 @@ public class Player {
     }
 
     public ReturnMessage attack() {
+        if(currentRoom.getEnemies().size() == 0)
+            return ReturnMessage.NO_ENEMY_FOUND;
         Enemy enemy = currentRoom.getEnemy();
+        if(currentWeapon == null)
+            return ReturnMessage.NOT_EQUIPPED;
+
+
         ReturnMessage returnMessage = currentWeapon.attack();
         switch (returnMessage) {
             case NO_AMMO:
                 return returnMessage;
             case RANGED_ATTACK:
                 //Logik
-                return returnMessage;
+                return attackSequence(enemy);
+            case MELEE_ATTACK:
+                return attackSequence(enemy);
+
         }
         if(currentWeapon != null) {
             return currentWeapon.attack();
         }
         return ReturnMessage.NOT_EQUIPPED;
+    }
+
+    private ReturnMessage attackSequence(Enemy enemy) {
+        int damage = currentWeapon.getDamage();
+        enemy.setHealth(enemy.getHealth() - damage);
+        if (enemy.getHealth() <= 0){
+
+            Weapon enemyWeapon = enemy.getCurrentWeapon();
+            currentRoom.addMeleeWeapons(enemyWeapon.getItemName(), enemyWeapon.getItemDescription(), enemyWeapon.getDamage());
+            return ReturnMessage.ENEMY_DEAD;
+        }
+        else {
+            int enemyDamage = enemy.getDamage();
+            setHealth(getHealth() - enemyDamage);
+            if (getHealth() <= 0){
+                return ReturnMessage.GAME_OVER;
+            }
+            return ReturnMessage.ENEMY_ALIVE;
+        }
     }
 
 }

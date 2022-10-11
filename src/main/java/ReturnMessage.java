@@ -9,5 +9,9 @@ public enum ReturnMessage {
     NOT_EQUIPPED,
     AMMO,
     NO_AMMO,
-    NOT_RIGHT_WEAPON
+    NOT_RIGHT_WEAPON,
+    ENEMY_DEAD,
+    ENEMY_ALIVE,
+    GAME_OVER,
+    NO_ENEMY_FOUND
 }

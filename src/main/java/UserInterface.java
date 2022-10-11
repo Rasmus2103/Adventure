@@ -155,7 +155,7 @@ public class UserInterface {
         } else {
             for (Enemy enemy : currentRoom.getEnemies()) {
                 System.out.println("You see a " + enemy.getEnemyName());
-                System.out.println(enemy.getEnemyDesription());
+                System.out.println(enemy.getEnemyDescription());
             }
         }
 
@@ -210,6 +210,18 @@ public class UserInterface {
             case NOT_EQUIPPED:
                 System.out.println("You do not have a Melee weapon equipped");
                 break;
+            case ENEMY_DEAD:
+                enemyHasBeenSlain();
+                break;
+            case ENEMY_ALIVE:
+                enemyStillAlive();
+                break;
+            case GAME_OVER:
+                enemyStillAlive();
+                System.out.println("GAME OVER!");
+                exiting();
+            case NO_ENEMY_FOUND:
+                System.out.println("There is no enemy to attack");
         }
     }
 
@@ -223,8 +235,21 @@ public class UserInterface {
                 System.out.println("You have no ammo left");
                 break;
             case NOT_EQUIPPED:
-                System.out.println("You do not have a Ranged weapon equipped");
+                System.out.println("You do not have a weapon equipped");
                 break;
+            case ENEMY_DEAD:
+                enemyHasBeenSlain();
+                break;
+            case ENEMY_ALIVE:
+                enemyStillAlive();
+                break;
+            case GAME_OVER:
+                enemyStillAlive();
+                System.out.println("GAME OVER!");
+                exiting();
+            case NO_ENEMY_FOUND:
+                System.out.println("There is no enemy to attack");
+                adventure.getPlayer().getCurrentWeapon().attack();
         }
     }
 
@@ -234,13 +259,13 @@ public class UserInterface {
         if (health > 0 && 25 >= health) {
             System.out.println("Your health is " + health + " You are low in hp. Avoid fights and get food");
         }
-        if (health > 25 && 50 > health) {
+        if (health > 25 && health < 35) {
             System.out.println("Your health is " + health + " You are kinda low, be careful with fights and get food");
         }
         if(health == 50) {
             System.out.println("Your health is " + health + " You are in good condition");
         }
-        if(health < 50) {
+        if(health < 50 && health >= 35) {
             System.out.println("Your health is " + health + " You are in peak condition");
         }
 
@@ -248,6 +273,21 @@ public class UserInterface {
 
     public void youCannotWriteThat() {
         System.out.println("You cannot write that");
+    }
+
+    public void enemyHasBeenSlain() {
+        Weapon currentWeapon = adventure.getCurrentRoom().getEnemy().getCurrentWeapon();
+        adventure.getCurrentRoom().removeEnemy(adventure.getCurrentRoom().getEnemy());
+        System.out.println("You have slain the enemy");
+        System.out.println("Enemy has dropped " + currentWeapon.getItemName());
+    }
+
+    public void enemyStillAlive() {
+        int health = adventure.getCurrentRoom().getEnemy().getHealth();
+        int damage = adventure.getCurrentRoom().getEnemy().getDamage();
+        System.out.println("Enemy has " + health + " health left");
+        System.out.println("Enemy attacked you and dealt " + damage);
+        showHealth();
     }
 
 }

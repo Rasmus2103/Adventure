@@ -55,6 +55,10 @@ public class Room {
         enemies.add(enemy);
     }
 
+    public void removeEnemy(Enemy enemy) {
+        enemies.remove(enemy);
+    }
+
     public Enemy getEnemy() {
         return enemies.get(0);
     }
