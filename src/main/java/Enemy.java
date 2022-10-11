@@ -1,15 +1,15 @@
 public class Enemy {
     private String enemyName;
     private String enemyDesription;
-    private Weapons currentWeapon;
+    private Weapon currentWeapon;
     private int health;
     private int damage;
 
-    public Enemy(String enemyName, String enemyDesription, int health, int damage) {
+    public Enemy(String enemyName, String enemyDesription, int health, Weapon weapons) {
         this.enemyName = enemyName;
         this.enemyDesription = enemyDesription;
         this.health = health;
-        this.damage = damage;
+        this.currentWeapon = weapons;
     }
 
     public String getEnemyName() {

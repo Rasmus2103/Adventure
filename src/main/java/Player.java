@@ -4,7 +4,7 @@ public class Player {
     private Room currentRoom;
     private String name;
     private int health;
-    private Weapons currentWeapon;
+    private Weapon currentWeapon;
     private ArrayList<Item> inventory;
 
     public Player(Room currentRoom) {
@@ -73,11 +73,11 @@ public class Player {
         return currentRoom;
     }
 
-    public Weapons getCurrentWeapon() {
+    public Weapon getCurrentWeapon() {
         return currentWeapon;
     }
 
-    public void setCurrentWeapon(Weapons currentWeapon) {
+    public void setCurrentWeapon(Weapon currentWeapon) {
         this.currentWeapon = currentWeapon;
     }
 
@@ -116,7 +116,7 @@ public class Player {
             }
         }
         else {
-            if(itemFromInventory == null){
+            if(itemFromInventory == null) {
                 return Eat.NOT_FOUND;
             } else {
                 return Eat.NOT_EDIBLE;
@@ -160,9 +160,9 @@ public class Player {
             //Hvis der ikke er et våben i inventory, siger den at den ikke kan finde det
             return ReturnMessage.NOT_FOUND;
         } else {
-            if(itemFromInventory instanceof Weapons) {
+            if(itemFromInventory instanceof Weapon) {
                 //equip player hvis det er et våben i inventory, det bliver IKKE fjernet fra inventory.
-                setCurrentWeapon((Weapons) itemFromInventory);
+                setCurrentWeapon((Weapon) itemFromInventory);
                 return ReturnMessage.EQUIPPED;
             } else {
                 //kan ikke equippes hvis det man skriver ikke er et våben
@@ -172,7 +172,16 @@ public class Player {
     }
 
     public ReturnMessage attack() {
-        if(currentWeapon instanceof Weapons) {
+        Enemy enemy = currentRoom.getEnemy();
+        ReturnMessage returnMessage = currentWeapon.attack();
+        switch (returnMessage) {
+            case NO_AMMO:
+                return returnMessage;
+            case RANGED_ATTACK:
+                //Logik
+                return returnMessage;
+        }
+        if(currentWeapon != null) {
             return currentWeapon.attack();
         }
         return ReturnMessage.NOT_EQUIPPED;

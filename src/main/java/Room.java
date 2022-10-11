@@ -15,6 +15,7 @@ public class Room {
         this.name = name;
         this.description = description;
         items = new ArrayList<>();
+        enemies = new ArrayList<>();
     }
 
     public void setRoom(Room north, Room south, Room west, Room east) {
@@ -35,7 +36,7 @@ public class Room {
     }
 
     public void addMeleeWeapons(String weaponName, String weaponDescription, int damage) {
-        MeleeWeapons meleeWeapons = new MeleeWeapons(weaponName, weaponDescription, damage) {
+        MeleeWeapon meleeWeapons = new MeleeWeapon(weaponName, weaponDescription, damage) {
             @Override
             public ReturnMessage attack() {
                 return ReturnMessage.MELEE_ATTACK;
@@ -45,13 +46,17 @@ public class Room {
     }
 
     public void addRangedWeapon(String weaponName, String weaponDescription, int damage) {
-        RangedWeapons rangedWeapons = new RangedWeapons(weaponName, weaponDescription, damage);
+        RangedWeapon rangedWeapons = new RangedWeapon(weaponName, weaponDescription, damage);
         items.add(rangedWeapons);
     }
 
-    public void addEnemy(String enemyName, String enemyDescription, int health, int damage) {
-        Enemy enemy = new Enemy(enemyName, enemyDescription, health, damage);
+    public void addEnemy(String enemyName, String enemyDescription, int health, Weapon weapons) {
+        Enemy enemy = new Enemy(enemyName, enemyDescription, health, weapons);
         enemies.add(enemy);
+    }
+
+    public Enemy getEnemy() {
+        return enemies.get(0);
     }
 
     public Item findItem(String itemName){
@@ -102,5 +107,9 @@ public class Room {
 
     public ArrayList<Item> getItems() {
         return items;
+    }
+
+    public ArrayList<Enemy> getEnemies() {
+        return enemies;
     }
 }

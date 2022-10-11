@@ -124,6 +124,10 @@ public class UserInterface {
                 "\ntake item to add the item in the room to your inventory" +
                 "\ndrop item to drop an item in your inventory to currentroom you are in" +
                 "\ninventory to check what's in your inventory" +
+                "\neat to consume food" +
+                "\nequip to arm yourself with a weapon" +
+                "\nattack to strike with your melee weapon" +
+                "\nfire to shoot with your ranged weapon" +
                 "\nexit to leave the game");
     }
 
@@ -143,6 +147,15 @@ public class UserInterface {
         } else {
             for (Item item : currentRoom.getItems()) {
                 System.out.println("You see a " + item.getItemName());
+            }
+        }
+
+        if (currentRoom.getEnemies().size() == 0) {
+            System.out.println("There is no enemies");
+        } else {
+            for (Enemy enemy : currentRoom.getEnemies()) {
+                System.out.println("You see a " + enemy.getEnemyName());
+                System.out.println(enemy.getEnemyDesription());
             }
         }
 
@@ -225,7 +238,10 @@ public class UserInterface {
             System.out.println("Your health is " + health + " You are kinda low, be careful with fights and get food");
         }
         if(health == 50) {
-            System.out.println("You are at full health");
+            System.out.println("Your health is " + health + " You are in good condition");
+        }
+        if(health < 50) {
+            System.out.println("Your health is " + health + " You are in peak condition");
         }
 
     }

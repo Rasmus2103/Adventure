@@ -1,7 +1,7 @@
-public class RangedWeapons extends Weapons {
+public class RangedWeapon extends Weapon {
 
     private int ammo = 5;
-    public RangedWeapons(String weaponName, String weaponDescription, int damage) {
+    public RangedWeapon(String weaponName, String weaponDescription, int damage) {
         super(weaponName, weaponDescription, damage);
     }
 
@@ -17,7 +17,6 @@ public class RangedWeapons extends Weapons {
     public String toString() {
         return "Ammo: " + ammo;
     }
-
 
 
 }

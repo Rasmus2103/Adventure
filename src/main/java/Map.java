@@ -41,10 +41,14 @@ public class Map {
         room8.addFood("tomato", "A disgusting looking tomato but still edible", 5);
 
         room2.addRangedWeapon("slingshot", "A slingshot that can might do some slight damage", 5);
-        room4.addMeleeWeapons("sword", "A shiny sword that help you fight the giant", 20);
-        room5.addRangedWeapon("crowsbow", "a crowsbow to use for ranged attacks", 40);
+        room4.addMeleeWeapons("sword", "A shiny sword", 20);
+        room5.addRangedWeapon("crowsbow", "a crowsbow to use for ranged attacks", 10);
         room9.addMeleeWeapons("axe", "A really big axe", 30);
 
+        Weapon club = new MeleeWeapon("Club","A giants club", 15);
+        room4.addEnemy("Giant", "A really ugly giant", 30, club);
+        Weapon axe = new MeleeWeapon("Minotaur's axe", "A giant axe", 30);
+        room9.addEnemy("Minotaur", "A giant minotaur", 60, axe);
 
         starterRoom = room1;
     }
