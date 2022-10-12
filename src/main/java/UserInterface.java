@@ -174,6 +174,9 @@ public class UserInterface {
             case NOT_FOUND:
                 System.out.println("There is no such food");
                 break;
+            case DEAD_BY_EATING:
+                System.out.println("You ate your self to death! ");
+                exiting();
         }
     }
 
