@@ -177,6 +177,7 @@ public class UserInterface {
             case DEAD_BY_EATING:
                 System.out.println("You ate your self to death! ");
                 exiting();
+                break;
         }
     }
 
@@ -213,8 +214,10 @@ public class UserInterface {
                 enemyStillAlive();
                 System.out.println("GAME OVER!");
                 exiting();
+                break;
             case NO_ENEMY_FOUND:
                 System.out.println("There is no enemy to attack");
+                break;
         }
     }
 
@@ -240,9 +243,11 @@ public class UserInterface {
                 enemyStillAlive();
                 System.out.println("GAME OVER!");
                 exiting();
+                break;
             case NO_ENEMY_FOUND:
                 System.out.println("There is no enemy to attack");
                 adventure.getPlayer().getCurrentWeapon().attack();
+                break;
         }
     }
 
