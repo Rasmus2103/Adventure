@@ -36,7 +36,7 @@ public class Map {
 
         room2.addFood("apple", "A big shiny red apple",15);
         room4.addFood("beans", "A can of beans, but you're alergic to beans", -20);
-        room5.addFood("chicken", "1 chickens walking around the room, to take ", 50);
+        room5.addFood("chicken", "1 chicken walking around the room, to take ", 50);
         room6.addFood("taco", "A delicious looking taco", -25);
         room8.addFood("tomato", "A disgusting looking tomato but still edible", 5);
 

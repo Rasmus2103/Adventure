@@ -17,16 +17,20 @@ public class Player {
 
     public boolean move(String direction) {
         Room requestedRoom = null;
-
-        if(direction.charAt(0) == 'n') {
-            requestedRoom = currentRoom.getNorth();
-        } else if(direction.charAt(0) == 's') {
-            requestedRoom = currentRoom.getSouth();
-        } else if(direction.charAt(0) == 'w') {
-            requestedRoom = currentRoom.getWest();
-        } else if(direction.charAt(0) == 'e') {
-            requestedRoom = currentRoom.getEast();
+        try {
+            if (direction.charAt(0) == 'n') {
+                requestedRoom = currentRoom.getNorth();
+            } else if (direction.charAt(0) == 's') {
+                requestedRoom = currentRoom.getSouth();
+            } else if (direction.charAt(0) == 'w') {
+                requestedRoom = currentRoom.getWest();
+            } else if (direction.charAt(0) == 'e') {
+                requestedRoom = currentRoom.getEast();
+            }
+        } catch (NullPointerException npe){
+            return false;
         }
+
 
         if(requestedRoom != null) {
             currentRoom = requestedRoom;
@@ -116,6 +120,9 @@ public class Player {
             } else {
                 health += ((Food) itemFromInventory).getHealthPoints();
                 inventory.remove(itemFromInventory);
+                if (getHealth() <= 0)
+                    return Eat.DEAD_BY_EATING;
+
                 return Eat.NOT_GOOD;
             }
         }
