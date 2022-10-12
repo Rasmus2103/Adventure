@@ -63,24 +63,6 @@ public class Room {
         return enemies.get(0);
     }
 
-    public Item findItem(String itemName){
-        for (Item item : items) {
-            if (item.getItemName().equalsIgnoreCase(itemName)){
-                return item;
-            }
-        }
-        return null;
-    }
-
-    public void removeItem(Item item, Room currentRoom) {
-        currentRoom.getItems().remove(item);
-    }
-
-    public void showItems(UserInterface UI) {
-        UI.printItems(items);
-    }
-
-
 
     public Room() {
     }

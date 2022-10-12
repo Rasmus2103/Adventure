@@ -68,17 +68,11 @@ public class UserInterface {
 
     }
 
-    public void printItemsInRoom() {
-        Room currentRoom = adventure.getCurrentRoom();
-        for (Item item : currentRoom.getItems()) {
-            System.out.println(item.getItemName());
-            System.out.println(item.getItemDescription());
-        }
-    }
 
     public void goMove(String userChoice) {
         if (adventure.go(userChoice)) {
             System.out.println(adventure.getCurrentRoom().getDescription());
+            System.out.println("Remember to look around");
         } else {
             System.out.println("You cannot go that way");
         }
@@ -123,7 +117,7 @@ public class UserInterface {
                 "\nlook to see what room you are in, and a description" +
                 "\ntake item to add the item in the room to your inventory" +
                 "\ndrop item to drop an item in your inventory to currentroom you are in" +
-                "\ninventory to check what's in your inventory" +
+                "\ni to check what's in your inventory" +
                 "\neat to consume food" +
                 "\nequip to arm yourself with a weapon" +
                 "\nattack to strike with your melee weapon" +
@@ -131,9 +125,9 @@ public class UserInterface {
                 "\nexit to leave the game");
     }
 
-    public void itemDoesNotExist(String itemName) {
+    /*public void itemDoesNotExist(String itemName) {
         System.out.println("There is no " + itemName);
-    }
+    }*/
 
     public void looking() {
         Room currentRoom = adventure.getCurrentRoom();
@@ -154,15 +148,11 @@ public class UserInterface {
             System.out.println("There is no enemies");
         } else {
             for (Enemy enemy : currentRoom.getEnemies()) {
-                System.out.println("You see a " + enemy.getEnemyName());
+                System.out.println("You see a " + enemy.getEnemyName() + " with " + enemy.getHealth() + " health");
                 System.out.println(enemy.getEnemyDescription());
             }
         }
 
-    }
-
-    public void printItems(ArrayList<Item> items) {
-        System.out.println(items.toString());
     }
 
 
@@ -276,17 +266,20 @@ public class UserInterface {
     }
 
     public void enemyHasBeenSlain() {
+        String enemy = adventure.getCurrentRoom().getEnemy().getEnemyName();
         Weapon currentWeapon = adventure.getCurrentRoom().getEnemy().getCurrentWeapon();
         adventure.getCurrentRoom().removeEnemy(adventure.getCurrentRoom().getEnemy());
-        System.out.println("You have slain the enemy");
+        System.out.println("You have slain the " + enemy);
         System.out.println("Enemy has dropped " + currentWeapon.getItemName());
     }
 
     public void enemyStillAlive() {
         int health = adventure.getCurrentRoom().getEnemy().getHealth();
-        int damage = adventure.getCurrentRoom().getEnemy().getDamage();
+        int playerDamage = adventure.getPlayer().getCurrentWeapon().getDamage();
+        int enemyDamage = adventure.getCurrentRoom().getEnemy().getDamage();
+        System.out.println("You attacked and dealt " + playerDamage + " damage");
         System.out.println("Enemy has " + health + " health left");
-        System.out.println("Enemy attacked you and dealt " + damage);
+        System.out.println("Enemy attacked you and dealt " + enemyDamage + " damage");
         showHealth();
     }
 

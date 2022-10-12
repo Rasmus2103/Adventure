@@ -36,10 +36,6 @@ public class Player {
         }
     }
 
-    public String look() {
-        return currentRoom.getName() + currentRoom.getDescription();
-    }
-
     public Item searchInventoryPlayer(String name) {
         for(Item i: inventory) {
             if(i.getItemName().equalsIgnoreCase(name)) {
@@ -49,24 +45,8 @@ public class Player {
         return null;
     }
 
-    public void removeItemPlayer(Item item) {
-        this.inventory.remove(item);
-    }
-
-    public void showItemPlayer(Item item) {
-        this.getInventory();
-    }
-
     public String toString() {
         return "Inventory: " + inventory;
-    }
-
-    public void setCurrentRoom(Room currentRoom) {
-        this.currentRoom = currentRoom;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Room getCurrentRoom() {
@@ -81,22 +61,9 @@ public class Player {
         this.currentWeapon = currentWeapon;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public int getHealth() {
         return health;
     }
-
-    /*public void setHealth(Item item) {
-        if (item instanceof Food) {
-            this.health += 20;
-        }
-        if (health > 50) {
-            health = 50;
-        }
-    }*/
 
     public ArrayList<Item> getInventory() {
         return inventory;
@@ -106,7 +73,7 @@ public class Player {
         this.health = health;
     }
 
-    public Eat eat(String name){
+    public Eat eat(String name) {
         Item itemFromInventory = searchInventoryPlayer(name);
         if(isEdible(itemFromInventory)){
             if(((Food)itemFromInventory).getHealthPoints() > 0) {
@@ -188,7 +155,6 @@ public class Player {
             case NO_AMMO:
                 return returnMessage;
             case RANGED_ATTACK:
-                //Logik
                 return attackSequence(enemy);
             case MELEE_ATTACK:
                 return attackSequence(enemy);
@@ -204,7 +170,6 @@ public class Player {
         int damage = currentWeapon.getDamage();
         enemy.setHealth(enemy.getHealth() - damage);
         if (enemy.getHealth() <= 0){
-
             Weapon enemyWeapon = enemy.getCurrentWeapon();
             currentRoom.addMeleeWeapons(enemyWeapon.getItemName(), enemyWeapon.getItemDescription(), enemyWeapon.getDamage());
             return ReturnMessage.ENEMY_DEAD;
@@ -212,7 +177,7 @@ public class Player {
         else {
             int enemyDamage = enemy.getDamage();
             setHealth(getHealth() - enemyDamage);
-            if (getHealth() <= 0){
+            if (getHealth() <= 0) {
                 return ReturnMessage.GAME_OVER;
             }
             return ReturnMessage.ENEMY_ALIVE;

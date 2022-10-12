@@ -1,7 +1,5 @@
 public enum ReturnMessage {
-    GOOD_TO_USE,
     EQUIPPED,
-    ALREADY_EQUIPPED,
     NOT_USABLE,
     NOT_FOUND,
     MELEE_ATTACK,
@@ -9,9 +7,8 @@ public enum ReturnMessage {
     NOT_EQUIPPED,
     AMMO,
     NO_AMMO,
-    NOT_RIGHT_WEAPON,
     ENEMY_DEAD,
     ENEMY_ALIVE,
     GAME_OVER,
-    NO_ENEMY_FOUND
+    NO_ENEMY_FOUND,
 }
